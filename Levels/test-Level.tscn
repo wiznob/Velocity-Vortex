@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://cp5ol73urfxhp"]
+
+[ext_resource type="Material" uid="uid://bylod678k4nnp" path="res://textures/test/black-test.tres" id="1_8m3dn"]
+[ext_resource type="PackedScene" uid="uid://g5yx4s6flap8" path="res://Player/dash.tscn" id="2_3bf6q"]
+
+[node name="Test" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.898978, 0.437995, 0, -0.437995, 0.898978, 0, 1.83555, 0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, -0.5, -16)
+size = Vector3(53, 2, 47)
+material = ExtResource("1_8m3dn")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, 1, 15.6504)
+operation = 2
+size = Vector3(8, 1, 11)
+material = ExtResource("1_8m3dn")
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="CSGCombiner3D"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -10.3777, 0.503811, 0)
+polygon = PackedVector2Array(-3.2109, -0.0293891, -3.14468, 0.930546, 1, 1, 4.51693, 0.0352855)
+depth = 4.64
+material = ExtResource("1_8m3dn")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.69752, -0.668836, -1.58655)
+operation = 2
+radius = 1.0
+height = 5.0134
+material = ExtResource("1_8m3dn")
+
+[node name="Dash" parent="." instance=ExtResource("2_3bf6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.424, 0.5, 5.78354)
