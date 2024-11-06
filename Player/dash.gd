@@ -2,6 +2,7 @@ extends CharacterBody3D
 
 @export_group("Camera")
 @export_range(0.0, 1.0) var mouse_sensitivity := 0.25
+@export_range(0.0, 3.0) var controller_sensitivity := 3.00
 
 @export_group("Movment")
 @export var move_speed := 8.0
@@ -22,7 +23,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
-
+#handling camera inputs
 func _unhandled_input(event: InputEvent) -> void:
 	var is_camera_motion :=(
 		event is InputEventMouseMotion and 
@@ -32,14 +33,18 @@ func _unhandled_input(event: InputEvent) -> void:
 		_camera_input_direction = event.screen_relative * mouse_sensitivity
 
 func _physics_process(delta: float) -> void:
+	var right_stick_input := Input.get_vector("right_stick_left", "right_stick_right", "right_stick_up", "right_stick_down")
+	if right_stick_input != Vector2.ZERO:
+		_camera_input_direction += right_stick_input * controller_sensitivity
 	#rotate vertically
 	_camera_pivot.rotation.x += _camera_input_direction.y * delta
 	_camera_pivot.rotation.x = clamp(_camera_pivot.rotation.x, -PI / 6.0, PI / 3.0)
 	#roatate horizonatly
-	_camera_pivot.rotation.y += _camera_input_direction.x * delta
+	_camera_pivot.rotation.y -= _camera_input_direction.x * delta
 #Set input direction back to zero
 	_camera_input_direction = Vector2.ZERO
-
+	
+	#movement logic
 	var raw_input := Input.get_vector("move_left", "move_right","move_up","move_down")
 	var forward := _camera.global_basis.z
 	var right := _camera.global_basis.x
