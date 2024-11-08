@@ -1,9 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://cp5ol73urfxhp"]
+[gd_scene load_steps=6 format=3 uid="uid://cp5ol73urfxhp"]
 
 [ext_resource type="Material" uid="uid://bylod678k4nnp" path="res://textures/test/black-test.tres" id="1_8m3dn"]
 [ext_resource type="PackedScene" uid="uid://g5yx4s6flap8" path="res://Player/dash.tscn" id="2_3bf6q"]
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hqev7"]
+
+[sub_resource type="Sky" id="Sky_h1qd2"]
+sky_material = SubResource("ProceduralSkyMaterial_hqev7")
+
+[sub_resource type="Environment" id="Environment_eq6nt"]
+background_mode = 2
+sky = SubResource("Sky_h1qd2")
+
 [node name="Test" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_eq6nt")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.898978, 0.437995, 0, -0.437995, 0.898978, 0, 1.83555, 0)
@@ -46,4 +58,4 @@ size = Vector3(8, 6, 1)
 material = ExtResource("1_8m3dn")
 
 [node name="Dash" parent="." instance=ExtResource("2_3bf6q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.424, 0.5, 5.78354)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -7.424, 0.5, 5.78354)

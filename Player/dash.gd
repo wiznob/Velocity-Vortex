@@ -10,12 +10,12 @@ extends CharacterBody3D
 @export var rotation_speed := 12
 @export var jump_impulse := 12.0
 @export var max_speed := 12.0
-@export var wall_jump_impulse := 10.0 # Add this line for wall jump impulse
+@export var wall_jump_impulse := 10.0 
 
 var _camera_input_direction := Vector2.ZERO
 var _last_movement_direction := Vector3.BACK
 var _gravity := -30.0
-var _is_touching_wall := false # Variable to track if the character is touching a wall
+var _is_touching_wall := false
 
 @onready var _camera_pivot: Node3D = %CameraPivot
 @onready var _camera: Camera3D = %Camera3D
@@ -26,7 +26,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
-# handling camera inputs
+# handling camera inputscache://www.reddit.com/r/buildapc/comments/106zfii/jusb3_port_is_wrongmislabeled/
 func _unhandled_input(event: InputEvent) -> void:
 	var is_camera_motion :=(
 		event is InputEventMouseMotion and 
@@ -73,7 +73,8 @@ func _physics_process(delta: float) -> void:
 	if is_starting_jump:
 		velocity.y = jump_impulse
 	elif Input.is_action_just_pressed("jump") and _is_touching_wall:
-		velocity = get_wall_normal() * wall_jump_impulse # Apply bounce in the opposite direction
+		# Apply bounce in the opposite direction
+		velocity = get_wall_normal() * wall_jump_impulse
 		velocity.y = jump_impulse
 		
 	move_and_slide()

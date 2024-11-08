@@ -20,7 +20,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_o5qeb")
 
 [node name="face" type="MeshInstance3D" parent="CollisionShape3D"]
-transform = Transform3D(0.324058, 0, 0, 0, 0.5, 0, 0, 0, 0.6, 0, 0.523018, -0.600382)
+transform = Transform3D(0.324058, 0, 0, 0, 0.5, 0, 0, 0, 0.6, 0, 0.523018, 0.446688)
 mesh = SubResource("BoxMesh_vvkxs")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
