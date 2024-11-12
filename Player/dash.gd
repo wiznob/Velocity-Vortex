@@ -5,20 +5,23 @@ extends CharacterBody3D
 @export_range(0.0, 3.0) var controller_sensitivity := 3.00
 
 @export_group("Movement")
-@export var move_speed := 8.0
+@export var move_speed = 8.0
 @export var acceleration := 20.0
 @export var rotation_speed := 12
 @export var jump_impulse := 12.0
-@export var max_speed := 12.0
-@export var wall_jump_impulse := 10.0 
+@export var wall_jump_impulse := 10.0
+@export var current_jumps = 0
+@export var max_jumps := 2
+@export var wall_friction := 0.7
+@export var max_wall_friction := 1.0
 
 var _camera_input_direction := Vector2.ZERO
 var _last_movement_direction := Vector3.BACK
 var _gravity := -30.0
-var _is_touching_wall := false
 
 @onready var _camera_pivot: Node3D = %CameraPivot
 @onready var _camera: Camera3D = %Camera3D
+@onready var _boost_timer = %BoostTimer
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("left_click"):
@@ -34,6 +37,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	)
 	if is_camera_motion:
 		_camera_input_direction = event.screen_relative * mouse_sensitivity
+	
 
 func _physics_process(delta: float) -> void:
 	var right_stick_input := Input.get_vector("right_stick_left", "right_stick_right", "right_stick_up", "right_stick_down")
@@ -51,7 +55,6 @@ func _physics_process(delta: float) -> void:
 	var raw_input := Input.get_vector("move_left", "move_right","move_up","move_down")
 	var forward := _camera.global_basis.z
 	var right := _camera.global_basis.x
-	
 	var move_direction := forward * raw_input.y + right * raw_input.x
 	move_direction.y = 0.0
 	move_direction = move_direction.normalized()
@@ -59,26 +62,33 @@ func _physics_process(delta: float) -> void:
 	var y_velocity := velocity.y
 	velocity.y = 0.0
 	velocity = velocity.move_toward(move_direction * move_speed, acceleration * delta)
-	
-	# Enforce the maximum speed
-	if velocity.length() > max_speed:
-		velocity = velocity.normalized() * max_speed
-	
 	velocity.y = y_velocity + _gravity * delta
 	
-	# Check if the character is touching a wall
-	_is_touching_wall = is_on_wall()
 	
-	var is_starting_jump := Input.is_action_just_pressed("jump") and is_on_floor()
-	if is_starting_jump:
-		velocity.y = jump_impulse
-	elif Input.is_action_just_pressed("jump") and _is_touching_wall:
+	#Jump logic
+	var is_starting_jump := Input.is_action_just_pressed("jump") and (is_on_floor() or current_jumps < max_jumps)
+	if Input.is_action_just_pressed("jump") and is_on_wall() and not is_on_floor():
 		# Apply bounce in the opposite direction
 		velocity = get_wall_normal() * wall_jump_impulse
 		velocity.y = jump_impulse
-		
+		#sticky jump?
+		# wall_friction * delta
+	elif is_on_wall_only():#Wall slide
+		velocity.x *= wall_friction
+		velocity.y *= wall_friction
+	elif is_starting_jump:
+		velocity.y = jump_impulse
+		current_jumps += 1
+	elif is_on_floor():
+		current_jumps = 0
+	
 	move_and_slide()
 
 	if move_direction.length() > 0.2:
 		_last_movement_direction = move_direction
 	var target_angle := Vector3.BACK.signed_angle_to(_last_movement_direction, Vector3.UP)
+
+
+func _on_timer_timeout():
+	move_speed = 40.0
+	print("time up")
