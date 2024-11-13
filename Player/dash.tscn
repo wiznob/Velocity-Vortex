@@ -38,9 +38,14 @@ spring_length = 8.0
 [node name="Camera3D" type="Camera3D" parent="CameraPivot/SpringArm3D"]
 unique_name_in_owner = true
 
+[node name="NormalTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
 [node name="BoostTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 wait_time = 5.0
 one_shot = true
 
-[connection signal="timeout" from="BoostTimer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="NormalTimer" to="." method="_on_normal_timer_timeout"]
+[connection signal="timeout" from="BoostTimer" to="." method="_on_boost_timer_timeout"]
