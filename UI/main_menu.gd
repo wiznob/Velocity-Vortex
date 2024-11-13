@@ -1,7 +1,6 @@
 extends Control
-@export_group("ControllerMenu")
-@export_range(0.0, 3.0) var controller_sensitivity := 2.00
-var _mouse_input_direction := Vector2.ZERO
+
+# const MOUSE_SPEED = 500.0
 
 func _on_play_pressed():
 	get_tree().change_scene_to_file("res://Levels/test-Level.tscn")
@@ -14,9 +13,13 @@ func _on_options_pressed():
 func _on_quit_pressed():
 	get_tree().quit()
 
+func _input(event):
+	pass
+	
 func _physics_process(delta):
-	print(get_global_mouse_position())
-	var left_stick_input := Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	if left_stick_input != Vector2.ZERO:
-		_mouse_input_direction += left_stick_input * controller_sensitivity
-		Input.warp_mouse(get_global_mouse_position() * _mouse_input_direction * delta)
+	pass
+	#WARNING this code will not work on Gnome wayland. the mouse will not update viusaly
+	#var left_stick_input = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	#var mouse_pos = get_global_mouse_position()
+	#print(mouse_pos)
+	#get_viewport().warp_mouse(round(get_global_mouse_position() + left_stick_input * MOUSE_SPEED * delta))

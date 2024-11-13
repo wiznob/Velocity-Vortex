@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dwta0r8houv6a"]
+[gd_scene load_steps=6 format=3 uid="uid://dwta0r8houv6a"]
 
 [ext_resource type="Script" path="res://UI/Options/options.gd" id="1_id6si"]
 [ext_resource type="FontFile" uid="uid://cvs2kj5ouuwty" path="res://UI/Fonts/toxigenesis.rg-bold.otf" id="2_n3uop"]
+[ext_resource type="Script" path="res://UI/focusUI.gd" id="3_undj6"]
 
 [sub_resource type="FontVariation" id="FontVariation_ifv8v"]
 base_font = ExtResource("2_n3uop")
@@ -41,5 +42,6 @@ layout_mode = 2
 layout_mode = 2
 text = "Back
 "
+script = ExtResource("3_undj6")
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Back" to="." method="_on_back_pressed"]

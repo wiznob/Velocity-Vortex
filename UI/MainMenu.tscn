@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://c1mgjiytrtuhh"]
+[gd_scene load_steps=7 format=3 uid="uid://c1mgjiytrtuhh"]
 
 [ext_resource type="Script" path="res://UI/main_menu.gd" id="1_seir4"]
 [ext_resource type="FontFile" uid="uid://cvs2kj5ouuwty" path="res://UI/Fonts/toxigenesis.rg-bold.otf" id="2_aitu8"]
+[ext_resource type="Script" path="res://UI/focusUI.gd" id="3_w3e6h"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_onmha"]
 font = ExtResource("2_aitu8")
@@ -64,6 +65,7 @@ size_flags_horizontal = 4
 layout_mode = 2
 theme_override_fonts/font = SubResource("FontVariation_5k6bp")
 text = "Play"
+script = ExtResource("3_w3e6h")
 
 [node name="Options" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
