@@ -43,7 +43,6 @@ func _unhandled_input(event: InputEvent) -> void:
 func _ready():
 	pass
 func _physics_process(delta: float) -> void:
-	#print(velocity.length())#potential boost mode solution?
 	var right_stick_input := Input.get_vector("right_stick_left", "right_stick_right", "right_stick_up", "right_stick_down")
 	if right_stick_input != Vector2.ZERO:
 		_camera_input_direction += right_stick_input * controller_sensitivity
@@ -54,7 +53,7 @@ func _physics_process(delta: float) -> void:
 	_camera_pivot.rotation.y -= _camera_input_direction.x * delta
 	# Set input direction back to zero
 	_camera_input_direction = Vector2.ZERO
-	print(_boost_timer.time_left)
+	
 	# movement logic
 	var raw_input := Input.get_vector("move_left", "move_right","move_up","move_down")
 	var forward := _camera.global_basis.z
