@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://g5yx4s6flap8"]
+[gd_scene load_steps=7 format=3 uid="uid://g5yx4s6flap8"]
 
 [ext_resource type="Script" path="res://Player/dash.gd" id="1_fymcf"]
+[ext_resource type="PackedScene" uid="uid://cbs0m8anx3r3p" path="res://UI/Dash/dash_ui.tscn" id="2_rj704"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o5qeb"]
 
@@ -46,6 +47,8 @@ one_shot = true
 unique_name_in_owner = true
 wait_time = 5.0
 one_shot = true
+
+[node name="DashUI" parent="." instance=ExtResource("2_rj704")]
 
 [connection signal="timeout" from="NormalTimer" to="." method="_on_normal_timer_timeout"]
 [connection signal="timeout" from="BoostTimer" to="." method="_on_boost_timer_timeout"]
