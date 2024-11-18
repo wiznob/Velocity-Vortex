@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=3 uid="uid://bvnquwfkypr1v"]
+
+[ext_resource type="Script" path="res://Models/Coin/coin.gd" id="1_ku4p2"]
+[ext_resource type="Texture2D" uid="uid://c1l8fxqhiyre2" path="res://icon.svg" id="2_acl3q"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_32mq3"]
+radius = 0.300719
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7ypdg"]
+albedo_texture = ExtResource("2_acl3q")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sq6oj"]
+albedo_color = Color(0.831373, 0.686275, 0.215686, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_y34s3"]
+material = SubResource("StandardMaterial3D_sq6oj")
+
+[node name="coin" type="Area3D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_ku4p2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_32mq3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.58, 0, 0, 0, 0.58, 0, 0, 0, 0.3, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_7ypdg")
+mesh = SubResource("SphereMesh_y34s3")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -17,6 +17,15 @@ script = ExtResource("1_o35jp")
 layout_mode = 0
 offset_right = 108.0
 offset_bottom = 40.0
+text = "0:00:00"
+label_settings = SubResource("LabelSettings_gbbls")
+
+[node name="coinLabel" type="Label" parent="."]
+layout_mode = 0
+offset_top = 40.0
+offset_right = 108.0
+offset_bottom = 80.0
+text = "Coins: "
 label_settings = SubResource("LabelSettings_gbbls")
 
 [node name="Timer" type="Timer" parent="."]

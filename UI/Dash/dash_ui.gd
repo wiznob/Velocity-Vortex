@@ -1,7 +1,7 @@
 extends Control
 
 var total_time = 0
-
+var coins = 0
 func _ready():
 	$Timer.wait_time = 0.01
 	$Timer.start()

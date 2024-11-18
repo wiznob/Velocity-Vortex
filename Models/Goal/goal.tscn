@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://by0ka1itjerie"]
+
+[ext_resource type="Script" path="res://Models/Goal/goal.gd" id="1_vrj6d"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_55x6j"]
+albedo_color = Color(0.0588235, 1, 1, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_onqup"]
+height = 6.03424
+radius = 3.7103
+
+[node name="Goal" type="Node3D"]
+script = ExtResource("1_vrj6d")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.03209, 0)
+height = 6.0
+material = SubResource("StandardMaterial3D_55x6j")
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="CSGCombiner3D/CSGCylinder3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.85518, 0.0208714)
+polygon = PackedVector2Array(0, 0, 0, 1, 1, 1, 3.50569, 0.310225)
+depth = 0.01
+
+[node name="Area3D" type="Area3D" parent="CSGCombiner3D/CSGCylinder3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CSGCombiner3D/CSGCylinder3D/Area3D"]
+shape = SubResource("CylinderShape3D_onqup")
+
+[connection signal="body_entered" from="CSGCombiner3D/CSGCylinder3D/Area3D" to="." method="_on_area_3d_body_entered"]
