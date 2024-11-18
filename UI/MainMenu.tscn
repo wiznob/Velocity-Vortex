@@ -1,12 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://c1mgjiytrtuhh"]
+[gd_scene load_steps=8 format=3 uid="uid://c1mgjiytrtuhh"]
 
-[ext_resource type="Script" path="res://UI/main_menu.gd" id="1_seir4"]
+[ext_resource type="Script" path="res://UI/menus.gd" id="1_seir4"]
 [ext_resource type="FontFile" uid="uid://cvs2kj5ouuwty" path="res://UI/Fonts/toxigenesis.rg-bold.otf" id="2_aitu8"]
+[ext_resource type="Theme" uid="uid://dhq1th0sqj2u7" path="res://UI/Fonts/Text_font.tres" id="3_h2xwm"]
 [ext_resource type="Script" path="res://UI/focusUI.gd" id="3_w3e6h"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_onmha"]
 font = ExtResource("2_aitu8")
-font_size = 50
+font_size = 70
 font_color = Color(0.0196078, 0.290196, 0.568627, 1)
 outline_size = 30
 outline_color = Color(0.243137, 0.486275, 0.694118, 1)
@@ -31,14 +32,15 @@ script = ExtResource("1_seir4")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = -1
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -211.0
-offset_top = 142.0
-offset_right = 211.0
-offset_bottom = 203.0
+offset_left = -295.5
+offset_top = 61.0
+offset_right = 295.5
+offset_bottom = 146.0
 grow_horizontal = 2
+grow_vertical = 2
 text = "Velocity Vortex"
 label_settings = SubResource("LabelSettings_onmha")
 
@@ -49,23 +51,27 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -62.0
-offset_top = -50.5
-offset_right = 15.0
-offset_bottom = 50.5
+offset_left = -87.5
+offset_top = -80.5
+offset_right = 87.5
+offset_bottom = 80.5
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(2, 2)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
+theme = ExtResource("3_h2xwm")
 
 [node name="Play" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = SubResource("FontVariation_5k6bp")
 text = "Play"
 script = ExtResource("3_w3e6h")
+
+[node name="Leaderboard" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Leaderboard"
 
 [node name="Options" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -79,5 +85,6 @@ text = "Quit
 "
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Leaderboard" to="." method="_on_leaderboard_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

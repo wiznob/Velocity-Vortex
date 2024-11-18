@@ -1,5 +1,5 @@
 extends Node3D
-
+signal goal_entred 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -12,4 +12,4 @@ func _process(delta):
 
 
 func _on_area_3d_body_entered(body):
-	get_tree().quit()
+	goal_entred.emit()

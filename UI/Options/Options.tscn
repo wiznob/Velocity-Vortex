@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://dwta0r8houv6a"]
 
-[ext_resource type="Script" path="res://UI/Options/options.gd" id="1_id6si"]
+[ext_resource type="Script" path="res://UI/menus.gd" id="1_bx7td"]
 [ext_resource type="FontFile" uid="uid://cvs2kj5ouuwty" path="res://UI/Fonts/toxigenesis.rg-bold.otf" id="2_n3uop"]
 [ext_resource type="Script" path="res://UI/focusUI.gd" id="3_undj6"]
 
@@ -17,7 +17,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_id6si")
+script = ExtResource("1_bx7td")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
