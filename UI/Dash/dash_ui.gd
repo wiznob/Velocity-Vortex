@@ -10,7 +10,6 @@ func _ready():
 
 func _on_timer_timeout():
 	total_time += 1
-	print(total_time)
 	var m = int(total_time / 6000.0) 
 	var s = int((total_time % 6000) / 100.0)
 	var ms = total_time % 100  

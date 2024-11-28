@@ -1,6 +1,6 @@
 @tool
 extends Node2D
-
+#DANGER You need to chnage this after mid point all together learn silent wolf instead of using the built in one or fix this
 const ScoreItem = preload("ScoreItem.tscn")
 const SWLogger = preload("res://addons/silent_wolf/utils/SWLogger.gd")
 
@@ -44,7 +44,15 @@ func render_board(scores: Array, local_scores: Array) -> void:
 			add_item(score.player_name, str(int(score.score)))
 	else:
 		for score in all_scores:
-			add_item(score.player_name, str(int(score.score)))
+			#this kinda sucks 
+			var original_score = score.score
+			var m = int(original_score / 6000)  # Use integer division
+			var s = int((int(original_score) % 6000) / 100)  # Use integer division
+			var ms = int(int(original_score) % 100)
+			score.formatted_score = "%02d:%02d:%02d" % [m, s, ms]
+			add_item(score.player_name, score.formatted_score)
+
+
 
 
 func is_default_leaderboard(ld_config: Dictionary) -> bool:
@@ -88,7 +96,6 @@ func add_item(player_name: String, score_value: String) -> void:
 	list_index += 1
 	item.get_node("PlayerName").text = str(list_index) + str(". ") + player_name
 	item.get_node("Score").text = (score_value)
-	print(score_value)
 	item.offset_top = list_index * 100
 	$"Board/HighScores/ScoreItemContainer".add_child(item)
 
