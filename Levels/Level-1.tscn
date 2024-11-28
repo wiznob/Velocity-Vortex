@@ -1,9 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://uypdw3t0cwww"]
+[gd_scene load_steps=12 format=3 uid="uid://uypdw3t0cwww"]
 
 [ext_resource type="Material" uid="uid://bylod678k4nnp" path="res://textures/test/black-test.tres" id="1_gmh0x"]
+[ext_resource type="Script" path="res://Levels/level.gd" id="1_ji2j3"]
 [ext_resource type="PackedScene" uid="uid://g5yx4s6flap8" path="res://Player/dash.tscn" id="1_xnpp4"]
 [ext_resource type="PackedScene" uid="uid://cbs0m8anx3r3p" path="res://UI/Dash/dash_ui.tscn" id="2_b4vwy"]
+[ext_resource type="PackedScene" uid="uid://by0ka1itjerie" path="res://Models/Goal/goal.tscn" id="2_mxdbw"]
 [ext_resource type="PackedScene" uid="uid://bbxai2rtn4yfm" path="res://Levels/OutOfBounds.tscn" id="2_vgyxa"]
+[ext_resource type="PackedScene" uid="uid://dgwxh5blkfje" path="res://UI/Goal/Goal_UI.tscn" id="3_hvpso"]
+[ext_resource type="PackedScene" uid="uid://bvnquwfkypr1v" path="res://Models/Coin/Coin.tscn" id="8_mksyo"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0hd3t"]
 
@@ -14,7 +18,8 @@ sky_material = SubResource("ProceduralSkyMaterial_0hd3t")
 background_mode = 2
 sky = SubResource("Sky_1tkis")
 
-[node name="Node3D" type="Node3D"]
+[node name="Level-1" type="Node3D"]
+script = ExtResource("1_ji2j3")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_va1kl")
@@ -31,6 +36,51 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.17511, -0.5, 2.09137)
 size = Vector3(14.4164, 2, 10.8173)
 material = ExtResource("1_gmh0x")
 
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="CSGCombiner3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4.72265, 3.31376, -8.65341)
+polygon = PackedVector2Array(-5.59745, -2.8169, 0, 1, 1, 1, 1, 0)
+depth = 6.81
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.19718, 3.80714, -22.1351)
+size = Vector3(6.93585, 1, 25.1843)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.90966, 5.37802, -44.2952)
+radius = 4.0
+height = 1.0
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.440255, 8.725, -51.9649)
+radius = 4.0
+height = 1.0
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5976, 10.5826, -62.5944)
+radius = 4.0
+height = 1.0
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(19.283, 0, 0, 0, 1.14985, 0, 0, 0, 19.283, -7.64981, 10.5826, -78.7624)
+size = Vector3(0.572021, 1, 1.10379)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(19.283, 0, 0, 0, 1.14985, 0, 0, 0, 19.283, -7.64981, 19.9482, -101.933)
+size = Vector3(0.572021, 1, 1.32094)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(3.32301, 0, 0, 0, 1, 0, 0, 0, 3.33546, -4.22175, 15.9576, -87.6922)
+size = Vector3(1, 9.50797, 1)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(3.32301, 0, 0, 0, 1, 0, 0, 0, 3.33546, -11.0283, 15.9657, -87.6922)
+size = Vector3(1, 9.5242, 1)
+
+[node name="Goal" parent="." instance=ExtResource("2_mxdbw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.78822, 20.5232, -112.509)
+
+[node name="GoalUI" parent="Goal" instance=ExtResource("3_hvpso")]
+
 [node name="Dash" parent="." instance=ExtResource("1_xnpp4")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -7.424, 0.5, 5.78354)
 
@@ -39,3 +89,46 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Boundary" parent="." instance=ExtResource("2_vgyxa")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, -63.8842, 11)
+
+[node name="Coins" type="Node3D" parent="."]
+
+[node name="coin" parent="Coins" instance=ExtResource("8_mksyo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.66083, 1.16003, 0.0337029)
+
+[node name="coin2" parent="Coins" instance=ExtResource("8_mksyo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.66083, 2.17072, -4.04062)
+
+[node name="coin3" parent="Coins" instance=ExtResource("8_mksyo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.66083, 5.57886, -10.1215)
+
+[node name="coin4" parent="Coins" instance=ExtResource("8_mksyo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.66083, 5.57886, -14.2708)
+
+[node name="coin5" parent="Coins" instance=ExtResource("8_mksyo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.66083, 5.57886, -18.2231)
+
+[node name="coin6" parent="Coins" instance=ExtResource("8_mksyo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.66083, 5.57886, -23.2231)
+
+[node name="coin7" parent="Coins" instance=ExtResource("8_mksyo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.66083, 5.57886, -29.9478)
+
+[node name="coin8" parent="Coins" instance=ExtResource("8_mksyo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.66083, 6.9569, -44.7419)
+
+[node name="coin9" parent="Coins" instance=ExtResource("8_mksyo")]
+transform = Transform3D(0.998949, 0, 0.0458337, 0, 1, 0, -0.0458337, 0, 0.998949, 0.034559, 10.0614, -51.262)
+
+[node name="coin10" parent="Coins" instance=ExtResource("8_mksyo")]
+transform = Transform3D(0.998949, 0, 0.0458337, 0, 1, 0, -0.0458337, 0, 0.998949, -10.2273, 12.0393, -63.7523)
+
+[node name="coin11" parent="Coins" instance=ExtResource("8_mksyo")]
+transform = Transform3D(0.998949, 0, 0.0458337, 0, 1, 0, -0.0458337, 0, 0.998949, -7.85825, 12.0393, -87.4134)
+
+[node name="coin12" parent="Coins" instance=ExtResource("8_mksyo")]
+transform = Transform3D(0.998949, 0, 0.0458337, 0, 1, 0, -0.0458337, 0, 0.998949, -7.85825, 15.5522, -87.4134)
+
+[node name="coin13" parent="Coins" instance=ExtResource("8_mksyo")]
+transform = Transform3D(0.998949, 0, 0.0458337, 0, 1, 0, -0.0458337, 0, 0.998949, -7.85825, 19.7024, -87.4134)
+
+[connection signal="goal_entred" from="Goal" to="." method="goal_entred"]

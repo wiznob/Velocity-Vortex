@@ -1,11 +1,14 @@
 extends Area3D
 
-var coins = 0
+func _ready():
+	var dash_ui_scene = get_node("../../Dash/DashUI")
+	var coin_label = dash_ui_scene.get_node("coinLabel")
+	coin_label.text = "Coins: " + str(Global.coins)
 
 func _on_body_entered(body):
-	var dash_ui_scene = get_node("../Dash/DashUI")
-	var coin_label = dash_ui_scene.get_node("coinLabel")
 	if body.name == "Dash":
-		coins += 1
-		coin_label.text = "Coins: " + str(coins)
+		var dash_ui_scene = get_node("../../Dash/DashUI")
+		var coin_label = dash_ui_scene.get_node("coinLabel")
+		Global.coins += 1
+		coin_label.text = "Coins: " + str(Global.coins)
 		queue_free()
