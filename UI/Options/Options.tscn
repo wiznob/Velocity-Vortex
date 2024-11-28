@@ -46,6 +46,11 @@ max_value = 3.0
 layout_mode = 2
 text = "Music"
 
+[node name="Fullscreen" type="CheckBox" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+button_pressed = true
+text = "Fullscreen"
+
 [node name="Back" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 4
@@ -53,4 +58,5 @@ text = "Back
 "
 script = ExtResource("3_undj6")
 
+[connection signal="toggled" from="MarginContainer/VBoxContainer/Fullscreen" to="." method="_on_fullscreen_toggled"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Back" to="." method="_on_back_pressed"]
