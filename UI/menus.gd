@@ -2,7 +2,7 @@ extends Control
 
 # const MOUSE_SPEED = 500.0
 var player_name
-var time = 10
+var final_time
 func _on_play_pressed():
 	get_tree().change_scene_to_file("res://Levels/test-Level.tscn")
 
@@ -33,7 +33,8 @@ func _physics_process(delta):
 func _on_submit_pressed():
 	if $LineEdit.text != "":
 		player_name = $LineEdit.text
-		SilentWolf.Scores.save_score(player_name, time)
+		get_tree().paused = false
+		SilentWolf.Scores.save_score(player_name, final_time)
 		get_tree().change_scene_to_file("res://addons/silent_wolf/Scores/Leaderboard.tscn")
 
 func _on_skip_pressed():
@@ -45,4 +46,6 @@ func _on_leaderboard_pressed():
 
 
 func _on_visibility_changed():
+	var dash_ui_scene = get_node("../../Dash/DashUI")
+	final_time = dash_ui_scene.get("total_time")
 	$VBoxContainer/Submit.grab_focus()

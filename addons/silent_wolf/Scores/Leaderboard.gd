@@ -59,17 +59,17 @@ func merge_scores_with_local_scores(scores: Array, local_scores: Array, max_scor
 			var in_array = score_in_score_array(scores, score)
 			if !in_array:
 				scores.append(score)
-			scores.sort_custom(sort_by_score);
+	scores.sort_custom(sort_by_score)
 	if scores.size() > max_scores:
 		var new_size = scores.resize(max_scores)
 	return scores
 
-
+# Editied to sort by assecding order 
 func sort_by_score(a: Dictionary, b: Dictionary) -> bool:
-	if a.score > b.score:
+	if a.score < b.score:
 		return true;
 	else:
-		if a.score < b.score:
+		if a.score > b.score:
 			return false;
 		else:
 			return true;
@@ -83,12 +83,12 @@ func score_in_score_array(scores: Array, new_score: Dictionary) -> bool:
 				in_score_array = true
 	return in_score_array
 
-
 func add_item(player_name: String, score_value: String) -> void:
 	var item = ScoreItem.instantiate()
 	list_index += 1
 	item.get_node("PlayerName").text = str(list_index) + str(". ") + player_name
-	item.get_node("Score").text = score_value
+	item.get_node("Score").text = (score_value)
+	print(score_value)
 	item.offset_top = list_index * 100
 	$"Board/HighScores/ScoreItemContainer".add_child(item)
 

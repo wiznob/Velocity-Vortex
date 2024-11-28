@@ -71,9 +71,9 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -7.424
 [node name="Goal" parent="." instance=ExtResource("3_ehtpr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.1425, 0.5, -1.00162)
 
+[node name="GoalUI" parent="Goal" instance=ExtResource("7_vnuju")]
+
 [node name="Area3D" parent="." instance=ExtResource("4_kaxpo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 1, 2)
-
-[node name="GoalUI" parent="." instance=ExtResource("7_vnuju")]
 
 [connection signal="goal_entred" from="Goal" to="." method="_on_goal_goal_entred"]
