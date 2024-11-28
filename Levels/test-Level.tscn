@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cp5ol73urfxhp"]
+[gd_scene load_steps=12 format=3 uid="uid://cp5ol73urfxhp"]
 
 [ext_resource type="Material" uid="uid://bylod678k4nnp" path="res://textures/test/black-test.tres" id="1_8m3dn"]
 [ext_resource type="Script" path="res://Levels/level.gd" id="1_nw803"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bvnquwfkypr1v" path="res://Models/Coin/Coin.tscn" id="4_kaxpo"]
 [ext_resource type="PackedScene" uid="uid://cbs0m8anx3r3p" path="res://UI/Dash/dash_ui.tscn" id="5_e8nty"]
 [ext_resource type="PackedScene" uid="uid://dgwxh5blkfje" path="res://UI/Goal/Goal_UI.tscn" id="7_vnuju"]
+[ext_resource type="PackedScene" uid="uid://bbxai2rtn4yfm" path="res://Levels/OutOfBounds.tscn" id="8_hikj7"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hqev7"]
 
@@ -75,5 +76,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.1425, 0.5, -1.00162)
 
 [node name="Area3D" parent="." instance=ExtResource("4_kaxpo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 1, 2)
+
+[node name="Boundary" parent="." instance=ExtResource("8_hikj7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, -63.8842, 11)
 
 [connection signal="goal_entred" from="Goal" to="." method="_on_goal_goal_entred"]

@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbxai2rtn4yfm"]
+
+[ext_resource type="Script" path="res://Levels/level.gd" id="1_spkx1"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_s3227"]
+
+[node name="Boundary" type="Area3D"]
+script = ExtResource("1_spkx1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 0, 0, 0)
+shape = SubResource("WorldBoundaryShape3D_s3227")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

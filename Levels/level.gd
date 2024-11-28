@@ -6,3 +6,7 @@ func _on_goal_goal_entred():
 	get_tree().paused = true
 	
 	
+
+
+func _on_body_entered(body):
+	get_tree().reload_current_scene()
