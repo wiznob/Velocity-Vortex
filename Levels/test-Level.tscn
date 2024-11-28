@@ -11,12 +11,12 @@
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hqev7"]
 
-[sub_resource type="Sky" id="Sky_h1qd2"]
+[sub_resource type="Sky" id="Sky_3b6qu"]
 sky_material = SubResource("ProceduralSkyMaterial_hqev7")
 
 [sub_resource type="Environment" id="Environment_eq6nt"]
 background_mode = 2
-sky = SubResource("Sky_h1qd2")
+sky = SubResource("Sky_3b6qu")
 
 [node name="Test" type="Node3D"]
 script = ExtResource("1_nw803")
@@ -68,6 +68,7 @@ material = ExtResource("1_8m3dn")
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -7.424, 0.5, 5.78354)
 
 [node name="DashUI" parent="Dash" instance=ExtResource("5_e8nty")]
+metadata/_edit_use_anchors_ = true
 
 [node name="Goal" parent="." instance=ExtResource("3_ehtpr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.1425, 0.5, -1.00162)

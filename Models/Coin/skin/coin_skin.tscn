@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://k8qmp084asqr"]
+
+[ext_resource type="PackedScene" uid="uid://bmti5h3irocm6" path="res://Models/Coin/skin/MovingCoin.glb" id="1_xmmly"]
+[ext_resource type="Script" path="res://Models/Coin/skin/coin_skin.gd" id="2_lwh3p"]
+
+[node name="CoinSkin" instance=ExtResource("1_xmmly")]
+script = ExtResource("2_lwh3p")
