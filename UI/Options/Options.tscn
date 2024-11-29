@@ -47,8 +47,8 @@ layout_mode = 2
 text = "Music"
 
 [node name="Fullscreen" type="CheckBox" parent="MarginContainer/VBoxContainer"]
+process_mode = 3
 layout_mode = 2
-button_pressed = true
 text = "Fullscreen"
 
 [node name="Back" type="Button" parent="MarginContainer/VBoxContainer"]
