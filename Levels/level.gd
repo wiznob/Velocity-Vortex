@@ -1,5 +1,7 @@
 extends Node3D
-
+#Code used for High level functions in a stage
+#@author W.O
+#November 2024
 func _on_goal_goal_entred():
 	pass
 
@@ -12,8 +14,7 @@ func goal_entred():
 	get_tree().paused = true
 
 func _physics_process(delta):
-	var pause = Input.is_action_just_pressed("pause")
-	if pause == true:
+	var pause_btn = Input.is_action_just_pressed("pause")
+	if pause_btn == true:
 		get_tree().paused = true
 		$Options.visible = true
-	

@@ -14,7 +14,7 @@ extends CharacterBody3D
 @export var current_jumps = 0
 @export var max_jumps := 2
 @export var wall_friction := 0.8
-@export var max_wall_friction := 1.0
+@export var max_wall_friction :=  2.0
 
 var _camera_input_direction := Vector2.ZERO
 var _last_movement_direction := Vector3.BACK
@@ -72,17 +72,18 @@ func _physics_process(delta: float) -> void:
 	velocity.y = 0.0
 	velocity = velocity.move_toward(move_direction * move_speed, acceleration * delta)
 	velocity.y = y_velocity + _gravity * delta
+	print(velocity)
 	
 	#Jump logic
 	var is_starting_jump := Input.is_action_just_pressed("jump") and (is_on_floor() or current_jumps < max_jumps)
-	if Input.is_action_just_pressed("jump") and is_on_wall() and not is_on_floor():
+	if Input.is_action_just_pressed("jump") and is_on_wall() and not is_on_floor():#wall jump
 		# Apply bounce in the opposite direction
 		velocity = get_wall_normal() * wall_jump_impulse
 		velocity.y = jump_impulse
 		#sticky jump?
 		# wall_friction *= delta
-	elif is_on_wall_only():#Wall slide
-		velocity.x *= wall_friction
+	elif is_on_wall_only():#Wall run
+		#velocity.x *= wall_friction
 		velocity.y *= wall_friction
 	elif is_starting_jump:
 		velocity.y = jump_impulse
