@@ -18,3 +18,4 @@ func _physics_process(delta):
 	if pause_btn == true:
 		get_tree().paused = true
 		$Options.visible = true
+		$Options/MarginContainer/VBoxContainer/Back.grab_focus()

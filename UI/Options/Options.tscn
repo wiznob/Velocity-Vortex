@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dwta0r8houv6a"]
 
-[ext_resource type="Script" path="res://UI/menus.gd" id="1_bx7td"]
+[ext_resource type="Script" path="res://UI/Options/Options.gd" id="1_ky23k"]
 [ext_resource type="Theme" uid="uid://dhq1th0sqj2u7" path="res://UI/Fonts/Text_font.tres" id="3_r4er5"]
 [ext_resource type="Script" path="res://UI/focusUI.gd" id="3_undj6"]
 
@@ -11,7 +11,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_bx7td")
+script = ExtResource("1_ky23k")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
