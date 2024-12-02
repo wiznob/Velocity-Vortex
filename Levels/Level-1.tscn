@@ -66,19 +66,19 @@ transform = Transform3D(19.283, 0, 0, 0, 1.14985, 0, 0, 0, 19.283, -7.64981, 10.
 size = Vector3(0.572021, 1, 1.10379)
 
 [node name="CSGBox3D6" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(19.283, 0, 0, 0, 1.14985, 0, 0, 0, 19.283, -7.64981, 19.9482, -101.933)
+transform = Transform3D(19.283, 0, 0, 0, 1.14985, 0, 0, 0, 19.283, -7.64981, 19.9482, -121.635)
 size = Vector3(0.572021, 1, 1.32094)
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(3.32301, 0, 0, 0, 1, 0, 0, 0, 3.33546, -4.22175, 15.9576, -87.6922)
-size = Vector3(1, 9.50797, 1)
+transform = Transform3D(3.32301, 0, 0, 0, 1, 0, 0, 0, 3.33546, -4.22175, 15.9576, -97.4558)
+size = Vector3(1, 9.50797, 6.85443)
 
 [node name="CSGBox3D5" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(3.32301, 0, 0, 0, 1, 0, 0, 0, 3.33546, -11.0283, 15.9657, -87.6922)
-size = Vector3(1, 9.5242, 1)
+transform = Transform3D(3.32301, 0, 0, 0, 1, 0, 0, 0, 3.33546, -11.0283, 15.9657, -97.5638)
+size = Vector3(1, 9.5242, 6.91919)
 
 [node name="Goal" parent="." instance=ExtResource("2_mxdbw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.78822, 20.5232, -112.509)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.78822, 20.5232, -126.003)
 
 [node name="GoalUI" parent="Goal" instance=ExtResource("3_hvpso")]
 
@@ -124,13 +124,19 @@ transform = Transform3D(0.998949, 0, 0.0458337, 0, 1, 0, -0.0458337, 0, 0.998949
 transform = Transform3D(0.998949, 0, 0.0458337, 0, 1, 0, -0.0458337, 0, 0.998949, -10.2273, 12.0393, -63.7523)
 
 [node name="coin11" parent="Coins" instance=ExtResource("8_mksyo")]
+transform = Transform3D(0.998949, 0, 0.0458337, 0, 1, 0, -0.0458337, 0, 0.998949, -7.85825, 12.0393, -72.1032)
+
+[node name="coin14" parent="Coins" instance=ExtResource("8_mksyo")]
 transform = Transform3D(0.998949, 0, 0.0458337, 0, 1, 0, -0.0458337, 0, 0.998949, -7.85825, 12.0393, -87.4134)
 
+[node name="coin15" parent="Coins" instance=ExtResource("8_mksyo")]
+transform = Transform3D(0.998949, 0, 0.0458337, 0, 1, 0, -0.0458337, 0, 0.998949, -7.85825, 12.0393, -78.3623)
+
 [node name="coin12" parent="Coins" instance=ExtResource("8_mksyo")]
-transform = Transform3D(0.998949, 0, 0.0458337, 0, 1, 0, -0.0458337, 0, 0.998949, -7.85825, 15.5522, -87.4134)
+transform = Transform3D(0.998949, 0, 0.0458337, 0, 1, 0, -0.0458337, 0, 0.998949, -7.85825, 20.9475, -111.779)
 
 [node name="coin13" parent="Coins" instance=ExtResource("8_mksyo")]
-transform = Transform3D(0.998949, 0, 0.0458337, 0, 1, 0, -0.0458337, 0, 0.998949, -7.85825, 19.7024, -87.4134)
+transform = Transform3D(0.998949, 0, 0.0458337, 0, 1, 0, -0.0458337, 0, 0.998949, -7.85825, 20.8186, -117.998)
 
 [node name="Options" parent="." instance=ExtResource("9_2606b")]
 process_mode = 3
