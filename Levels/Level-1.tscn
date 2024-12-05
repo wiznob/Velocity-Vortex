@@ -2,7 +2,7 @@
 
 [ext_resource type="Material" uid="uid://bylod678k4nnp" path="res://textures/test/black-test.tres" id="1_gmh0x"]
 [ext_resource type="Script" path="res://Levels/level.gd" id="1_ji2j3"]
-[ext_resource type="PackedScene" uid="uid://g5yx4s6flap8" path="res://Player/dash.tscn" id="1_xnpp4"]
+[ext_resource type="PackedScene" uid="uid://g5yx4s6flap8" path="res://Characters/dash.tscn" id="1_xnpp4"]
 [ext_resource type="PackedScene" uid="uid://cbs0m8anx3r3p" path="res://UI/Dash/dash_ui.tscn" id="2_b4vwy"]
 [ext_resource type="PackedScene" uid="uid://by0ka1itjerie" path="res://Models/Goal/goal.tscn" id="2_mxdbw"]
 [ext_resource type="PackedScene" uid="uid://bbxai2rtn4yfm" path="res://Levels/OutOfBounds.tscn" id="2_vgyxa"]

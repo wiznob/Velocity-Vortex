@@ -74,12 +74,18 @@ func _physics_process(delta: float) -> void:
 	#Jump logic
 	var is_starting_jump := Input.is_action_just_pressed("jump") and (is_on_floor() or current_jumps < max_jumps)
 	if Input.is_action_just_pressed("jump") and is_on_wall_only():#wall jump
+		var wall_normal_x = get_wall_normal().x
+		var wall_normal_z = get_wall_normal().z
+		var current_z_velocity = velocity.z
+		var current_x_velocity = velocity.x
 		# Apply bounce in the opposite direction
-		var current_z_velocity = velocity.z# only works if wall wall normal is on z axis 
 		velocity = get_wall_normal() * wall_jump_impulse
 		velocity.y = jump_impulse
-		velocity.z = current_z_velocity
-		#velocity.x = current_x_velocity
+		#checking what axis the wall is not on and re applying its velocity 
+		if wall_normal_x == 0:
+			velocity.x = current_x_velocity
+		elif wall_normal_z == 0:
+			velocity.z = current_z_velocity
 		#sticky jump?
 		# wall_friction *= delta
 	elif is_on_wall_only():#Wall run
@@ -92,6 +98,7 @@ func _physics_process(delta: float) -> void:
 		current_jumps = 0
 	move_and_slide()
 
+	#this code will be used later for raotaing the 3d model
 	if move_direction.length() > 0.2:
 		_last_movement_direction = move_direction
 	var target_angle := Vector3.BACK.signed_angle_to(_last_movement_direction, Vector3.UP)
