@@ -3,12 +3,12 @@
 [ext_resource type="Material" uid="uid://bylod678k4nnp" path="res://textures/test/black-test.tres" id="1_8m3dn"]
 [ext_resource type="Script" path="res://Levels/level.gd" id="1_nw803"]
 [ext_resource type="PackedScene" uid="uid://g5yx4s6flap8" path="res://Characters/dash.tscn" id="2_3bf6q"]
+[ext_resource type="PackedScene" uid="uid://bfikvyvylhkq" path="res://UI/Pause/pause_menu.tscn" id="2_m830u"]
 [ext_resource type="PackedScene" uid="uid://by0ka1itjerie" path="res://Models/Goal/goal.tscn" id="3_ehtpr"]
 [ext_resource type="PackedScene" uid="uid://bvnquwfkypr1v" path="res://Models/Coin/Coin.tscn" id="4_kaxpo"]
 [ext_resource type="PackedScene" uid="uid://cbs0m8anx3r3p" path="res://UI/Dash/dash_ui.tscn" id="5_e8nty"]
 [ext_resource type="PackedScene" uid="uid://dgwxh5blkfje" path="res://UI/Goal/Goal_UI.tscn" id="7_vnuju"]
 [ext_resource type="PackedScene" uid="uid://bbxai2rtn4yfm" path="res://Levels/OutOfBounds.tscn" id="8_hikj7"]
-[ext_resource type="PackedScene" uid="uid://dwta0r8houv6a" path="res://UI/Options/Options.tscn" id="9_m5tlt"]
 [ext_resource type="PackedScene" uid="uid://b454mlw8lfllt" path="res://Characters/enemies/GroundEnemy.tscn" id="10_sg8us"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hqev7"]
@@ -29,6 +29,9 @@ script = ExtResource("1_nw803")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_eq6nt")
+
+[node name="PauseMenu" parent="." instance=ExtResource("2_m830u")]
+visible = false
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.898978, 0.437995, 0, -0.437995, 0.898978, 0, 1.83555, 0)
@@ -51,10 +54,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 1, 2)
 
 [node name="Boundary" parent="." instance=ExtResource("8_hikj7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, -63.8842, 11)
-
-[node name="Options" parent="." instance=ExtResource("9_m5tlt")]
-process_mode = 3
-visible = false
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_l3sni")

@@ -109,7 +109,7 @@ func add_no_scores_message() -> void:
 
 func add_loading_scores_message() -> void:
 	var item = $"Board/MessageContainer/TextMessage"
-	item.text = "Loading scores..."
+	item.text = "Loading times..."
 	$"Board/MessageContainer".show()
 	item.offset_top = 135
 

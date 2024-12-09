@@ -14,8 +14,4 @@ func goal_entred():
 	get_tree().paused = true
 
 func _physics_process(delta):
-	var pause_btn = Input.is_action_just_pressed("pause")
-	if pause_btn == true:
-		get_tree().paused = true
-		$Options.visible = true
-		$Options/MarginContainer/VBoxContainer/Back.grab_focus()
+	pass
