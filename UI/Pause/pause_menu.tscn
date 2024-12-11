@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bfikvyvylhkq"]
+[gd_scene load_steps=3 format=3 uid="uid://bfikvyvylhkq"]
 
 [ext_resource type="Script" path="res://UI/Pause/pause_menu.gd" id="1_pfmh4"]
 [ext_resource type="Theme" uid="uid://dhq1th0sqj2u7" path="res://UI/Fonts/Text_font.tres" id="2_llpf8"]
-[ext_resource type="Script" path="res://UI/focusUI.gd" id="3_mge1b"]
 
 [node name="PauseMenu" type="Control"]
 process_mode = 3
@@ -60,7 +59,6 @@ process_mode = 3
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
 text = "Resume"
-script = ExtResource("3_mge1b")
 
 [node name="Restart" type="Button" parent="VBoxContainer"]
 process_mode = 3

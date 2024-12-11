@@ -12,6 +12,7 @@ func _process(delta):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		visible = true
 		get_tree().paused = true
+		$VBoxContainer/Resume.grab_focus()
 
 
 func _on_quit_pressed():
