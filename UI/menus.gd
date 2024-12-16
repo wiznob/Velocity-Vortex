@@ -18,7 +18,7 @@ func _on_quit_pressed():
 	get_tree().quit()
 
 func _on_leaderboard_pressed():
-	get_tree().change_scene_to_file("res://addons/silent_wolf/Scores/Leaderboard.tscn")
+	get_tree().change_scene_to_file("res://UI/leaderboard/NewLeaderboard.tscn")
 #end of main menu
 
 
@@ -39,7 +39,7 @@ func _on_submit_pressed():
 		player_name = $LineEdit.text
 		get_tree().paused = false
 		SilentWolf.Scores.save_score(player_name, final_time)
-		get_tree().change_scene_to_file("res://addons/silent_wolf/Scores/Leaderboard.tscn")
+		get_tree().change_scene_to_file("res://UI/leaderboard/NewLeaderboard.tscn")
 
 func _on_skip_pressed():
 	get_tree().paused = false
