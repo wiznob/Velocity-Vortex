@@ -2,7 +2,7 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://chakd06l2oqhc"
+uid="uid://btrfj4dstvqqi"
 path.s3tc="res://.godot/imported/dash_Cat-Base.png-363b307a92460503c788939c1b8e1bde.s3tc.ctex"
 path.etc2="res://.godot/imported/dash_Cat-Base.png-363b307a92460503c788939c1b8e1bde.etc2.ctex"
 metadata={
@@ -10,7 +10,7 @@ metadata={
 "vram_texture": true
 }
 generator_parameters={
-"md5": "85ff85f882836af0233e1d35e43439ba"
+"md5": "cc73bde18732c654cf2b1af7cb676e46"
 }
 
 [deps]
