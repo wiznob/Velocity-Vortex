@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://b454mlw8lfllt"]
+[gd_scene load_steps=6 format=3 uid="uid://b454mlw8lfllt"]
 
 [ext_resource type="Script" path="res://Characters/enemies/ground_enemy.gd" id="1_6sowj"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gos7r"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oyw5e"]
 albedo_color = Color(1, 0, 0, 1)
@@ -13,6 +15,12 @@ material = SubResource("StandardMaterial3D_oyw5e")
 [node name="CharacterBody3D" type="CharacterBody3D"]
 script = ExtResource("1_6sowj")
 
+[node name="Area3D" type="Area3D" parent="." groups=["enemies"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("BoxShape3D_gos7r")
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_qrlgc")
 
@@ -20,3 +28,5 @@ mesh = SubResource("CapsuleMesh_qrlgc")
 shape = SubResource("CapsuleShape3D_isvof")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]

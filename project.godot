@@ -27,6 +27,7 @@ enabled=PackedStringArray("res://addons/gut/plugin.cfg", "res://addons/silent_wo
 [global_group]
 
 enemies=""
+player=""
 
 [input]
 

@@ -15,10 +15,11 @@ extends CharacterBody3D
 @export var max_jumps := 2
 @export var wall_friction := 0.8
 @export var max_wall_friction :=  2.0
-
 var _camera_input_direction := Vector2.ZERO
 var _last_movement_direction := Vector3.BACK
 var _gravity := -30.0
+
+@export var attacking = false
 
 @onready var _camera_pivot: Node3D = %CameraPivot
 @onready var _camera: Camera3D = %Camera3D
@@ -38,8 +39,6 @@ func _unhandled_input(event: InputEvent) -> void:
 	)
 	if is_camera_motion:
 		_camera_input_direction = event.screen_relative * mouse_sensitivity
-func _ready():
-	pass
 func _physics_process(delta: float) -> void:
 	var right_stick_input := Input.get_vector("right_stick_left", "right_stick_right", "right_stick_up", "right_stick_down")
 	if right_stick_input != Vector2.ZERO:
@@ -102,3 +101,17 @@ func _physics_process(delta: float) -> void:
 	if move_direction.length() > 0.2:
 		_last_movement_direction = move_direction
 	var target_angle := Vector3.BACK.signed_angle_to(_last_movement_direction, Vector3.UP)
+
+	#Attacking
+	if Input.is_action_just_pressed("attack"):
+		attacking = true
+		$AttackArea/AttackShape.disabled = false 
+	else:
+		attacking = false
+		$AttackArea/AttackShape.disabled = true
+
+func _on_attack_area_area_entered(area):
+	if area.is_in_group("enemies"):
+		print("hit")
+		if is_on_floor() == false:
+			velocity.y = jump_impulse
