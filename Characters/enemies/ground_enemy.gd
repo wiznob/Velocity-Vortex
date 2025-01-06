@@ -1,20 +1,18 @@
 extends CharacterBody3D
 
 var health = 5
-@onready var nav_agent = $NavigationAgent3D
 var speed  = 10
+var acceleration = 20
+@onready var nav = $NavigationAgent3D
 func _physics_process(delta):
-	var current_location = global_transform.origin
-	var next_location = nav_agent.get_next_path_position()
-	var new_velocity = (next_location - current_location).normalized() * speed
-	velocity = new_velocity
+	var direction = Vector3()
+	nav.target_position = $"../Dash".global_position
+	direction = nav.get_next_path_position() - global_position
+	direction = direction.normalized()
+	velocity = velocity.move_toward(direction * speed, acceleration * delta)
 	move_and_slide()
-func update_target_location(target_location):
-	nav_agent.set_target_location = target_location
-	
 func _on_area_3d_area_entered(area):
 	if area.is_in_group("player"):
-		print("ow")
 		health -= 1
 		print(health)
 		if health == 0:
