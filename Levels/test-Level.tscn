@@ -97,7 +97,7 @@ size = Vector3(17.9218, 10.2892, 1)
 material = ExtResource("1_8m3dn")
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("10_sg8us")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 2, -31)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 15.4339, -31)
 
 [node name="Target" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2233, -13.2288)

@@ -30,6 +30,10 @@ func _input(event: InputEvent) -> void:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	if event.is_action_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	# increasing jump strength the longer the button is held down
+	if event.is_action_released("jump"):
+		if velocity.y > 0.0:
+			velocity.y *= 0.5
 
 # handling camera inputs
 func _unhandled_input(event: InputEvent) -> void:
