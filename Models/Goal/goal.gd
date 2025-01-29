@@ -12,4 +12,5 @@ func _process(delta):
 
 
 func _on_area_3d_body_entered(body):
-	goal_entred.emit()
+	if body.name == "Dash":
+		goal_entred.emit()

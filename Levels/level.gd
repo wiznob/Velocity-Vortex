@@ -5,7 +5,7 @@ extends Node3D
 func _on_goal_goal_entred():
 	pass
 
-func _on_body_entered(body):
+func _on_body_entered(body):# for death plane 
 	get_tree().reload_current_scene()
 
 func goal_entred():

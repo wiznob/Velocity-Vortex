@@ -1,6 +1,7 @@
 extends CharacterBody3D
 
 var health = 5
+var _gravity := -30.0
 @export_group("Movement")
 @export var move_speed = 12.0
 @export var acceleration := 20.0

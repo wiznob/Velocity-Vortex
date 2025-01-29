@@ -1,0 +1,59 @@
+[gd_scene load_steps=10 format=3 uid="uid://5t1vi8hmm4sg"]
+
+[ext_resource type="Script" path="res://Characters/enemies/Roller/roller.gd" id="1_giuln"]
+[ext_resource type="Texture2D" uid="uid://d3km2wkdd2sjb" path="res://Characters/enemies/Roller/hexagon.jpg" id="1_t4nhx"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_xic7l"]
+radius = 7.99439
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_yyuvu"]
+radius = 0.583051
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_addy0"]
+albedo_texture = ExtResource("1_t4nhx")
+
+[sub_resource type="SphereMesh" id="SphereMesh_w4yl2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2lksi"]
+albedo_color = Color(1, 0, 0, 1)
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+emission_energy_multiplier = 16.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_rtc4l"]
+lightmap_size_hint = Vector2i(17, 17)
+material = SubResource("StandardMaterial3D_2lksi")
+is_hemisphere = true
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_76eu2"]
+
+[node name="Roller" type="CharacterBody3D"]
+script = ExtResource("1_giuln")
+jump_impulse = 3.0
+
+[node name="TrackingArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TrackingArea"]
+shape = SubResource("SphereShape3D_xic7l")
+
+[node name="HurtBox" type="Area3D" parent="." groups=["enemies"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtBox"]
+shape = SubResource("SphereShape3D_yyuvu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_addy0")
+mesh = SubResource("SphereMesh_w4yl2")
+
+[node name="eye" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.254082, 0)
+mesh = SubResource("SphereMesh_rtc4l")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_76eu2")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[connection signal="body_entered" from="TrackingArea" to="." method="_on_tracking_area_body_entered"]
+[connection signal="body_exited" from="TrackingArea" to="." method="_on_tracking_area_body_exited"]
+[connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
