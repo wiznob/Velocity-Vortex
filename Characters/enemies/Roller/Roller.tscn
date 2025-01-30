@@ -1,59 +1,79 @@
-[gd_scene load_steps=10 format=3 uid="uid://5t1vi8hmm4sg"]
+[gd_scene load_steps=11 format=3 uid="uid://d0jeu7c1ii0j6"]
 
-[ext_resource type="Script" path="res://Characters/enemies/Roller/roller.gd" id="1_giuln"]
-[ext_resource type="Texture2D" uid="uid://d3km2wkdd2sjb" path="res://Characters/enemies/Roller/hexagon.jpg" id="1_t4nhx"]
+[ext_resource type="Texture2D" uid="uid://d3km2wkdd2sjb" path="res://Characters/enemies/Roller/hexagon.jpg" id="1_gqh8k"]
+[ext_resource type="Script" path="res://Characters/enemies/Roller/roller.gd" id="1_o82ul"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_xic7l"]
-radius = 7.99439
+[sub_resource type="SphereShape3D" id="SphereShape3D_wncs8"]
+radius = 9.0
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_yyuvu"]
-radius = 0.583051
+[sub_resource type="SphereShape3D" id="SphereShape3D_l3vcx"]
+radius = 0.651032
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_addy0"]
-albedo_texture = ExtResource("1_t4nhx")
+[sub_resource type="SphereShape3D" id="SphereShape3D_275tf"]
+radius = 3.0
 
-[sub_resource type="SphereMesh" id="SphereMesh_w4yl2"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vcje0"]
+albedo_texture = ExtResource("1_gqh8k")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2lksi"]
+[sub_resource type="SphereMesh" id="SphereMesh_x0fmk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r1h3c"]
 albedo_color = Color(1, 0, 0, 1)
 emission_enabled = true
 emission = Color(1, 0, 0, 1)
 emission_energy_multiplier = 16.0
 
-[sub_resource type="SphereMesh" id="SphereMesh_rtc4l"]
+[sub_resource type="SphereMesh" id="SphereMesh_bcbow"]
 lightmap_size_hint = Vector2i(17, 17)
-material = SubResource("StandardMaterial3D_2lksi")
+material = SubResource("StandardMaterial3D_r1h3c")
 is_hemisphere = true
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_76eu2"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_3s7vj"]
 
-[node name="Roller" type="CharacterBody3D"]
-script = ExtResource("1_giuln")
-jump_impulse = 3.0
+[node name="Roller" type="RigidBody3D"]
+script = ExtResource("1_o82ul")
 
 [node name="TrackingArea" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="TrackingArea"]
-shape = SubResource("SphereShape3D_xic7l")
+shape = SubResource("SphereShape3D_wncs8")
 
 [node name="HurtBox" type="Area3D" parent="." groups=["enemies"]]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HurtBox"]
-shape = SubResource("SphereShape3D_yyuvu")
+shape = SubResource("SphereShape3D_l3vcx")
+
+[node name="AttackBox" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AttackBox"]
+shape = SubResource("SphereShape3D_275tf")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-material_override = SubResource("StandardMaterial3D_addy0")
-mesh = SubResource("SphereMesh_w4yl2")
+material_override = SubResource("StandardMaterial3D_vcje0")
+mesh = SubResource("SphereMesh_x0fmk")
 
 [node name="eye" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.254082, 0)
-mesh = SubResource("SphereMesh_rtc4l")
+mesh = SubResource("SphereMesh_bcbow")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("SphereShape3D_76eu2")
+shape = SubResource("SphereShape3D_3s7vj")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="WallRay" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+enabled = false
+
+[node name="FloorRay" type="RayCast3D" parent="."]
+enabled = false
+debug_shape_thickness = 5
 
 [connection signal="body_entered" from="TrackingArea" to="." method="_on_tracking_area_body_entered"]
 [connection signal="body_exited" from="TrackingArea" to="." method="_on_tracking_area_body_exited"]
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,42 +1,61 @@
-extends CharacterBody3D
-
-var health = 5
+extends RigidBody3D
+var direction
 var follow_player = false
-var hit = false
-var _gravity := -30.0
-var knockback = 40
+var self_destruct = false
 @export_group("Movement")
-@export var move_speed = 6.0
-@export var acceleration := 20.0
-@export var jump_impulse := 6.0
+@export var knockback = 10.0
+@export var move_speed = 12.0
 @onready var nav = $NavigationAgent3D
+@onready var floor_ray = $FloorRay
+@onready var wall_ray = $WallRay
+# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
+	player_kill()
+	# Timer to stop instant self destruction after player hit
+		# Tracking the player 
 	if follow_player == true:
-		var direction = Vector3()
+		direction = Vector3()
 		nav.target_position = $"../Dash".global_position
 		direction = nav.get_next_path_position() - global_position
 		direction = direction.normalized()
-		velocity = velocity.move_toward(direction * move_speed, acceleration * delta)
-		var wall = is_on_wall()
-		if hit == true:
-			velocity = get_wall_normal() * knockback
-			velocity.y = jump_impulse
-		if wall == true:
-			velocity.y = jump_impulse
-		move_and_slide()
-		
-func _on_hurt_box_area_entered(area):
-	if area.is_in_group("player"):
-		hit = true
-		follow_player = false
-		health -= 1
-		print(health)
-		if health == 0:
-			queue_free()
+		var force = direction.normalized() * move_speed
+		apply_central_force(force)
+
+#Getting and apply knockback when hit
+func get_knockback_direction():
+	nav.target_position = $"../Dash".global_position
+	return (global_transform.origin - nav.target_position).normalized()
+	
+func apply_knockback():
+	var direction = get_knockback_direction()
+	direction.y = 1.0  # for vertical knockback
+	direction = direction.normalized()
+	var impulse = direction * knockback
+	apply_central_impulse(impulse)
+
+# Will run if hit by a player
+func player_kill():
+	if self_destruct == true and (floor_ray.is_colliding() or wall_ray.is_colliding()):
+		queue_free()
+# Enabling raycast after 0.5 seconds 
+func _on_timer_timeout():
+	floor_ray.enabled = true
+	wall_ray.enabled = true 
+
+# Check if player is with tracking area 
 func _on_tracking_area_body_entered(body):
 	if body.name == "Dash":
 		follow_player = true
 
+# Check if the player left the area 
 func _on_tracking_area_body_exited(body):
 	if body.name == "Dash":
 		follow_player = false
+		
+# Check if hit by the player 
+func _on_hurt_box_area_entered(area):
+	if area.is_in_group("player"):
+		follow_player = false
+		apply_knockback()
+		self_destruct = true
+		$Timer.start()
