@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://d0jeu7c1ii0j6"]
+[gd_scene load_steps=12 format=3 uid="uid://d0jeu7c1ii0j6"]
 
 [ext_resource type="Texture2D" uid="uid://d3km2wkdd2sjb" path="res://Characters/enemies/Roller/hexagon.jpg" id="1_gqh8k"]
 [ext_resource type="Script" path="res://Characters/enemies/Roller/roller.gd" id="1_o82ul"]
+[ext_resource type="PackedScene" uid="uid://dlnm16mdpmmf4" path="res://Effects/Explosion/Explosion.tscn" id="3_pu260"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_wncs8"]
 radius = 9.0
@@ -31,6 +32,8 @@ is_hemisphere = true
 [sub_resource type="SphereShape3D" id="SphereShape3D_3s7vj"]
 
 [node name="Roller" type="RigidBody3D"]
+contact_monitor = true
+max_contacts_reported = 1
 script = ExtResource("1_o82ul")
 
 [node name="TrackingArea" type="Area3D" parent="."]
@@ -43,10 +46,11 @@ shape = SubResource("SphereShape3D_wncs8")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HurtBox"]
 shape = SubResource("SphereShape3D_l3vcx")
 
-[node name="AttackBox" type="Area3D" parent="."]
+[node name="AttackBox" type="Area3D" parent="." groups=["bothSides"]]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="AttackBox"]
+[node name="AttackShape" type="CollisionShape3D" parent="AttackBox"]
 shape = SubResource("SphereShape3D_275tf")
+disabled = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 material_override = SubResource("StandardMaterial3D_vcje0")
@@ -65,6 +69,10 @@ shape = SubResource("SphereShape3D_3s7vj")
 wait_time = 0.5
 one_shot = true
 
+[node name="DespawnTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
 [node name="WallRay" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 enabled = false
@@ -73,7 +81,13 @@ enabled = false
 enabled = false
 debug_shape_thickness = 5
 
+[node name="Explosion" parent="." instance=ExtResource("3_pu260")]
+
+[connection signal="blowup" from="." to="." method="_on_blowup"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_entered" from="TrackingArea" to="." method="_on_tracking_area_body_entered"]
 [connection signal="body_exited" from="TrackingArea" to="." method="_on_tracking_area_body_exited"]
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
+[connection signal="area_entered" from="AttackBox" to="." method="_on_attack_box_area_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="DespawnTimer" to="." method="_on_despawn_timer_timeout"]

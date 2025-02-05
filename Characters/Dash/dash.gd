@@ -116,6 +116,9 @@ func _physics_process(delta: float) -> void:
 
 func _on_attack_area_area_entered(area):
 	if area.is_in_group("enemies"):
-		print("hit")
 		if is_on_floor() == false:
 			velocity.y = jump_impulse
+
+func _on_hurt_area_area_entered(area):
+	if area.is_in_group("bothSides"):
+		velocity.y = jump_impulse

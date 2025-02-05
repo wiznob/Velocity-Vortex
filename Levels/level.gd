@@ -13,5 +13,6 @@ func goal_entred():
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	$Goal/GoalUI.visible = true
 	get_tree().paused = true
+
 func _physics_process(delta):
 	pass

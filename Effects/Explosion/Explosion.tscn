@@ -1,6 +1,7 @@
-[gd_scene load_steps=24 format=3 uid="uid://dlnm16mdpmmf4"]
+[gd_scene load_steps=25 format=3 uid="uid://dlnm16mdpmmf4"]
 
 [ext_resource type="Texture2D" uid="uid://cfrppegdh6lc0" path="res://textures/explosion/Flare00.PNG" id="1_845xj"]
+[ext_resource type="Script" path="res://Effects/Explosion/explosion.gd" id="1_qg8s2"]
 [ext_resource type="Material" uid="uid://cf12e14iren52" path="res://Materials/Flash.tres" id="2_jlwh6"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jl5eb"]
@@ -110,6 +111,7 @@ color = Color(0.501961, 0.501961, 0.501961, 1)
 [sub_resource type="QuadMesh" id="QuadMesh_8p4wf"]
 
 [node name="Explosion" type="Node3D"]
+script = ExtResource("1_qg8s2")
 
 [node name="Sparks" type="GPUParticles3D" parent="."]
 material_override = SubResource("StandardMaterial3D_jl5eb")

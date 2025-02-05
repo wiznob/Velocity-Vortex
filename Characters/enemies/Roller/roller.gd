@@ -2,6 +2,9 @@ extends RigidBody3D
 var direction
 var follow_player = false
 var self_destruct = false
+var died = false
+var health = 1
+signal blowup
 @export_group("Movement")
 @export var knockback = 10.0
 @export var move_speed = 12.0
@@ -11,6 +14,11 @@ var self_destruct = false
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	player_kill()
+	#despawn after blow up effect
+	if died == true and health == 1:
+		I_died()
+		died = false 
+		health = 0
 	# Timer to stop instant self destruction after player hit
 		# Tracking the player 
 	if follow_player == true:
@@ -36,7 +44,12 @@ func apply_knockback():
 # Will run if hit by a player
 func player_kill():
 	if self_destruct == true and (floor_ray.is_colliding() or wall_ray.is_colliding()):
-		queue_free()
+		$Explosion.play_effect()
+		$MeshInstance3D.visible = false 
+		$eye.visible = false
+		died = true
+		# queue_free()
+
 # Enabling raycast after 0.5 seconds 
 func _on_timer_timeout():
 	floor_ray.enabled = true
@@ -52,10 +65,29 @@ func _on_tracking_area_body_exited(body):
 	if body.name == "Dash":
 		follow_player = false
 		
-# Check if hit by the player 
+# Check if hit by the player and laucnh backwards
 func _on_hurt_box_area_entered(area):
 	if area.is_in_group("player"):
 		follow_player = false
 		apply_knockback()
 		self_destruct = true
 		$Timer.start()
+# Despawn after effect
+
+func I_died():
+	$DespawnTimer.start()
+
+func _on_despawn_timer_timeout():
+	queue_free()
+
+func _on_body_entered(body):
+	if body.name == "Dash":
+		emit_signal("blowup")
+
+#If it hits the player first blow up instantly 
+func _on_blowup():
+		$AttackBox/AttackShape.call_deferred("set_disabled", false)
+		$Explosion.play_effect()
+		$MeshInstance3D.visible = false 
+		$eye.visible = false
+		died = true
