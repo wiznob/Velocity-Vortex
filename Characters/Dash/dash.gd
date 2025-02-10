@@ -118,7 +118,10 @@ func _on_attack_area_area_entered(area):
 	if area.is_in_group("enemies"):
 		if is_on_floor() == false:
 			velocity.y = jump_impulse
-
+# Taking damage
 func _on_hurt_area_area_entered(area):
+	var area_position = area.global_transform.origin
+	var direction = (global_transform.origin - area_position).normalized()
 	if area.is_in_group("bothSides"):
+		velocity = direction * wall_jump_impulse
 		velocity.y = jump_impulse
