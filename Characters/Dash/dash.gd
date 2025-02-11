@@ -1,9 +1,10 @@
 extends CharacterBody3D
-
+#Camera Exports 
 @export_group("Camera")
 @export_range(0.0, 1.0) var mouse_sensitivity := 0.25
 @export_range(0.0, 3.0) var controller_sensitivity := 3.00
 
+#Movement exports 
 @export_group("Movement")
 @export var move_speed = 8.0
 @export var boost_speed = 16.0
@@ -18,24 +19,20 @@ extends CharacterBody3D
 var _camera_input_direction := Vector2.ZERO
 var _last_movement_direction := Vector3.BACK
 var _gravity := -30.0
+var attacking = false
 
-@export var attacking = false
-
+#Get camera ready 
 @onready var _camera_pivot: Node3D = %CameraPivot
 @onready var _camera: Camera3D = %Camera3D
 
-
+#Capture mouse when left click is pressed 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("left_click"):
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	if event.is_action_pressed("ui_cancel"):
+	if event.is_action_pressed("ui_cancel"): #Free mouse
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	# increasing jump strength the longer the button is held down
-	if event.is_action_released("jump"):
-		if velocity.y > 0.0:
-			velocity.y *= 0.5
 
-# handling camera inputs
+# handling camera movement with mouse/trackpad
 func _unhandled_input(event: InputEvent) -> void:
 	var is_camera_motion :=(
 		event is InputEventMouseMotion and 
@@ -43,7 +40,13 @@ func _unhandled_input(event: InputEvent) -> void:
 	)
 	if is_camera_motion:
 		_camera_input_direction = event.screen_relative * mouse_sensitivity
+
+	# increasing jump strength the longer the button is held down
+	if event.is_action_released("jump"):
+		if velocity.y > 0.0:
+			velocity.y *= 0.5
 func _physics_process(delta: float) -> void:
+	#handling camera movement with controller
 	var right_stick_input := Input.get_vector("right_stick_left", "right_stick_right", "right_stick_up", "right_stick_down")
 	if right_stick_input != Vector2.ZERO:
 		_camera_input_direction += right_stick_input * controller_sensitivity
@@ -63,16 +66,16 @@ func _physics_process(delta: float) -> void:
 	var move_direction := forward * raw_input.y + right * raw_input.x
 	move_direction.y = 0.0
 	move_direction = move_direction.normalized()
+	var y_velocity := velocity.y
+	velocity.y = 0.0
+	velocity = velocity.move_toward(move_direction * move_speed, acceleration * delta)
+	velocity.y = y_velocity + _gravity * delta
+	
 	#yeahhh a sprint button works much better.....
 	if sprint == true:
 		move_speed = boost_speed
 	else:
 		move_speed = 8.0
-
-	var y_velocity := velocity.y
-	velocity.y = 0.0
-	velocity = velocity.move_toward(move_direction * move_speed, acceleration * delta)
-	velocity.y = y_velocity + _gravity * delta
 	
 	#Jump logic
 	var is_starting_jump := Input.is_action_just_pressed("jump") and (is_on_floor() or current_jumps < max_jumps)
@@ -98,7 +101,7 @@ func _physics_process(delta: float) -> void:
 		velocity.y = jump_impulse
 		current_jumps += 1
 	elif is_on_floor():
-		current_jumps = 0
+		current_jumps = 0 #Reset jumps when on floor
 	move_and_slide()
 
 	#this code will be used later for raotaing the 3d model
@@ -106,7 +109,7 @@ func _physics_process(delta: float) -> void:
 		_last_movement_direction = move_direction
 	var target_angle := Vector3.BACK.signed_angle_to(_last_movement_direction, Vector3.UP)
 
-	#Attacking
+	#Enabling attack box
 	if Input.is_action_just_pressed("attack"):
 		attacking = true
 		$AttackArea/AttackShape.disabled = false 
@@ -114,10 +117,12 @@ func _physics_process(delta: float) -> void:
 		attacking = false
 		$AttackArea/AttackShape.disabled = true
 
+#Checking if attack connected
 func _on_attack_area_area_entered(area):
 	if area.is_in_group("enemies"):
 		if is_on_floor() == false:
 			velocity.y = jump_impulse
+
 # Taking damage
 func _on_hurt_area_area_entered(area):
 	var area_position = area.global_transform.origin

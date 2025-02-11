@@ -5,13 +5,15 @@ var self_destruct = false
 var died = false
 var health = 1
 signal blowup
+
+#Movement Exports
 @export_group("Movement")
 @export var knockback = 10.0
 @export var move_speed = 12.0
 @onready var nav = $NavigationAgent3D
 @onready var floor_ray = $FloorRay
 @onready var wall_ray = $WallRay
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+
 func _physics_process(delta):
 	player_kill()
 	#despawn after blow up effect
@@ -19,7 +21,6 @@ func _physics_process(delta):
 		I_died()
 		died = false 
 		health = 0
-	# Timer to stop instant self destruction after player hit
 		# Tracking the player 
 	if follow_player == true:
 		direction = Vector3()
@@ -48,7 +49,6 @@ func player_kill():
 		$MeshInstance3D.visible = false 
 		$eye.visible = false
 		died = true
-		# queue_free()
 
 # Enabling raycast after 0.5 seconds 
 func _on_timer_timeout():
@@ -65,21 +65,23 @@ func _on_tracking_area_body_exited(body):
 	if body.name == "Dash":
 		follow_player = false
 		
-# Check if hit by the player and laucnh backwards
+# Check if hit by the player and launch backwards
 func _on_hurt_box_area_entered(area):
 	if area.is_in_group("player"):
 		follow_player = false
 		apply_knockback()
 		self_destruct = true
+		#Timer exist to stop instant explosion and turn on ray cast (line 54)
 		$Timer.start()
-# Despawn after effect
 
+#start despawn timer
 func I_died():
 	$DespawnTimer.start()
 
 func _on_despawn_timer_timeout():
 	queue_free()
 
+#Touched player without getting hit
 func _on_body_entered(body):
 	if body.name == "Dash":
 		emit_signal("blowup")
