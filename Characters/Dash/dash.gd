@@ -7,10 +7,10 @@ extends CharacterBody3D
 #Movement exports 
 @export_group("Movement")
 @export var move_speed = 8.0
-@export var boost_speed = 16.0
+@export var boost_speed = 12.0
 @export var acceleration := 20.0
 @export var rotation_speed := 12
-@export var jump_impulse := 12.0
+@export var jump_impulse := 10.0
 @export var wall_jump_impulse := 10.0
 @export var current_jumps = 0
 @export var max_jumps := 2
@@ -57,7 +57,7 @@ func _physics_process(delta: float) -> void:
 	_camera_pivot.rotation.y -= _camera_input_direction.x * delta
 	# Set input direction back to zero
 	_camera_input_direction = Vector2.ZERO
-	
+
 	# movement logic
 	var sprint := Input.is_action_pressed("run")
 	var raw_input := Input.get_vector("move_left", "move_right","move_up","move_down")
@@ -127,6 +127,7 @@ func _on_attack_area_area_entered(area):
 func _on_hurt_area_area_entered(area):
 	var area_position = area.global_transform.origin
 	var direction = (global_transform.origin - area_position).normalized()
-	if area.is_in_group("bothSides"):
+	if area.is_in_group("bothSides") or area.is_in_group("EnemyAttack"):
 		velocity = direction * wall_jump_impulse
 		velocity.y = jump_impulse
+		current_jumps = 2

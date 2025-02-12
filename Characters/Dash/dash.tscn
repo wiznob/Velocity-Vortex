@@ -42,7 +42,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.275723, 0.575714)
 shape = SubResource("BoxShape3D_8gswg")
 disabled = true
 
-[node name="HurtArea" type="Area3D" parent="."]
+[node name="HurtArea" type="Area3D" parent="." groups=["PlayerHit"]]
 
 [node name="HurtShape" type="CollisionShape3D" parent="HurtArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
