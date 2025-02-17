@@ -5,7 +5,7 @@ var move_direction = Vector3()
 var _last_movement_direction = Vector3()
 
 func _physics_process(delta):
-	var player = get_node("../../Dash")
+	var player = get_node("../../../Dash/CollisionShape3D")
 	if player:
 		var direction = (player.global_transform.origin - global_transform.origin)
 		velocity = velocity.move_toward(direction * move_speed, acceleration * delta)

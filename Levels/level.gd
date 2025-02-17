@@ -9,6 +9,8 @@ func _on_goal_goal_entred():
 func _on_body_entered(body):# Death plane
 	if body.name == "Dash":
 		get_tree().reload_current_scene()
+	else:
+		body.queue_free()
 
 func goal_entred(): # When the player gets within goal range
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE

@@ -24,7 +24,7 @@ func _physics_process(delta):
 		# Tracking the player 
 	if follow_player == true:
 		direction = Vector3()
-		nav.target_position = $"../Dash".global_position
+		nav.target_position = $"../../Dash".global_position
 		direction = nav.get_next_path_position() - global_position
 		direction = direction.normalized()
 		var force = direction.normalized() * move_speed
@@ -32,7 +32,7 @@ func _physics_process(delta):
 
 #Getting and apply knockback when hit
 func get_knockback_direction():
-	nav.target_position = $"../Dash".global_position
+	nav.target_position = $"../../Dash".global_position
 	return (global_transform.origin - nav.target_position).normalized()
 	
 func apply_knockback():

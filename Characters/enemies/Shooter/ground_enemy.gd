@@ -26,7 +26,7 @@ func _physics_process(delta):
 		velocity.y = 0.0
 		velocity.y = y_velocity + _gravity * delta
 		var direction_neg = Vector3()
-		nav.target_position = $"../Dash".global_position
+		nav.target_position = $"../../Dash".global_position
 		direction = nav.get_next_path_position() - global_position
 		direction = direction.normalized()
 		velocity = velocity.move_toward(direction * move_speed, acceleration * delta)
@@ -37,7 +37,7 @@ func _physics_process(delta):
 		velocity.y = 0.0
 		velocity.y = y_velocity + _gravity * delta
 		var direction_neg = Vector3()
-		nav.target_position = $"../Dash".global_position
+		nav.target_position = $"../../Dash".global_position
 		direction = nav.get_next_path_position() - global_position
 		direction = direction.normalized()
 		direction_neg = - direction

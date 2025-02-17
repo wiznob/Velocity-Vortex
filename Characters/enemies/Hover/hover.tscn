@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://u0e66g5qof18"]
+
+[ext_resource type="Script" path="res://Characters/enemies/Hover/hover.gd" id="1_njwce"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qtkgj"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_32670"]
+material = SubResource("StandardMaterial3D_qtkgj")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_sus3l"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_82fq7"]
+radius = 0.790123
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_jp8fb"]
+radius = 1.00556
+
+[node name="Hover" type="CharacterBody3D"]
+script = ExtResource("1_njwce")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_32670")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_sus3l")
+
+[node name="HurtBox" type="Area3D" parent="." groups=["enemies"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtBox"]
+shape = SubResource("SphereShape3D_82fq7")
+
+[node name="AttackBox" type="Area3D" parent="." groups=["EnemyAttack"]]
+
+[node name="AttackShape" type="CollisionShape3D" parent="AttackBox"]
+shape = SubResource("SphereShape3D_jp8fb")
+disabled = true
+
+[node name="AttackMode" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="IdleMode" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
+[connection signal="timeout" from="AttackMode" to="." method="_on_attack_mode_timeout"]
+[connection signal="timeout" from="IdleMode" to="." method="_on_idle_mode_timeout"]
