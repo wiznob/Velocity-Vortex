@@ -24,6 +24,7 @@ var attacking = false
 #Get camera ready 
 @onready var _camera_pivot: Node3D = %CameraPivot
 @onready var _camera: Camera3D = %Camera3D
+@onready var _skin
 
 #Capture mouse when left click is pressed 
 func _input(event: InputEvent) -> void:
@@ -104,18 +105,16 @@ func _physics_process(delta: float) -> void:
 		current_jumps = 0 #Reset jumps when on floor
 	move_and_slide()
 
-	#this code will be used later for raotaing the 3d model
-	if move_direction.length() > 0.2:
-		_last_movement_direction = move_direction
-	var target_angle := Vector3.BACK.signed_angle_to(_last_movement_direction, Vector3.UP)
+	#Rotation
+	$Rotate.rotation.y = lerp($Rotate.rotation.y, atan2(-velocity.x, -velocity.z), delta * acceleration)
 
 	#Enabling attack box
 	if Input.is_action_just_pressed("attack"):
 		attacking = true
-		$AttackArea/AttackShape.disabled = false 
+		$Rotate/AttackArea/AttackShape.disabled = false 
 	else:
 		attacking = false
-		$AttackArea/AttackShape.disabled = true
+		$Rotate/AttackArea/AttackShape.disabled = true
 
 #Checking if attack connected
 func _on_attack_area_area_entered(area):

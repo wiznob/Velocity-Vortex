@@ -6,11 +6,11 @@
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_0wkjb"]
 height = 1.90975
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_8gswg"]
-size = Vector3(1, 1.43967, 0.782166)
-
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_306lm"]
 height = 1.89723
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8gswg"]
+size = Vector3(1, 1.43967, 0.782166)
 
 [node name="Dash" type="CharacterBody3D"]
 collision_layer = 3
@@ -19,9 +19,6 @@ script = ExtResource("1_fymcf")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CylinderShape3D_0wkjb")
-
-[node name="dash" parent="." instance=ExtResource("2_v3wb8")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
 [node name="CameraPivot" type="Node3D" parent="."]
 unique_name_in_owner = true
@@ -34,19 +31,24 @@ spring_length = 8.0
 [node name="Camera3D" type="Camera3D" parent="CameraPivot/SpringArm3D"]
 unique_name_in_owner = true
 
-[node name="AttackArea" type="Area3D" parent="." groups=["player"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.522928, 0)
-
-[node name="AttackShape" type="CollisionShape3D" parent="AttackArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.275723, 0.575714)
-shape = SubResource("BoxShape3D_8gswg")
-disabled = true
-
 [node name="HurtArea" type="Area3D" parent="." groups=["PlayerHit"]]
 
 [node name="HurtShape" type="CollisionShape3D" parent="HurtArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CylinderShape3D_306lm")
 
-[connection signal="area_entered" from="AttackArea" to="." method="_on_attack_area_area_entered"]
+[node name="Rotate" type="Node3D" parent="."]
+
+[node name="dash" parent="Rotate" instance=ExtResource("2_v3wb8")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="AttackArea" type="Area3D" parent="Rotate" groups=["player"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.522928, 0)
+
+[node name="AttackShape" type="CollisionShape3D" parent="Rotate/AttackArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.275723, 0.575714)
+shape = SubResource("BoxShape3D_8gswg")
+disabled = true
+
 [connection signal="area_entered" from="HurtArea" to="." method="_on_hurt_area_area_entered"]
+[connection signal="area_entered" from="Rotate/AttackArea" to="." method="_on_attack_area_area_entered"]
