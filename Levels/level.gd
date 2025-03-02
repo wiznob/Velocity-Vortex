@@ -2,13 +2,18 @@ extends Node3D
 #Code used for High level functions in a stage
 #@author W.O
 #November 2024
+
 func _on_goal_goal_entred():
 	pass
 
 #Boundary
 func _on_body_entered(body):# Death plane
 	if body.name == "Dash":
-		get_tree().reload_current_scene()
+		var death_node = get_node("../Death") # Adjust the path as necessary
+		if death_node != null:
+			death_node._out_of_bounds()
+		else:
+			print("Death node not found!")
 	else:
 		body.queue_free()
 

@@ -1,8 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://cp5ol73urfxhp"]
+[gd_scene load_steps=19 format=3 uid="uid://cp5ol73urfxhp"]
 
 [ext_resource type="Material" uid="uid://bylod678k4nnp" path="res://textures/test/black-test.tres" id="1_8m3dn"]
 [ext_resource type="Script" path="res://Levels/level.gd" id="1_nw803"]
 [ext_resource type="PackedScene" uid="uid://g5yx4s6flap8" path="res://Characters/Dash/dash.tscn" id="2_3bf6q"]
+[ext_resource type="PackedScene" uid="uid://coiul1xe4gccj" path="res://UI/Dead/Death.tscn" id="2_dx1c1"]
 [ext_resource type="PackedScene" uid="uid://bfikvyvylhkq" path="res://UI/Pause/pause_menu.tscn" id="2_m830u"]
 [ext_resource type="PackedScene" uid="uid://by0ka1itjerie" path="res://Models/Goal/goal.tscn" id="3_ehtpr"]
 [ext_resource type="PackedScene" uid="uid://bvnquwfkypr1v" path="res://Models/Coin/Coin.tscn" id="4_kaxpo"]
@@ -34,6 +35,9 @@ script = ExtResource("1_nw803")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_eq6nt")
+
+[node name="Death" parent="." instance=ExtResource("2_dx1c1")]
+visible = false
 
 [node name="PauseMenu" parent="." instance=ExtResource("2_m830u")]
 visible = false
@@ -124,4 +128,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.32, 1.2492, -8.8172)
 [node name="BounceOrb4" parent="." instance=ExtResource("13_v1saq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.2091, 1.2492, -8.8172)
 
+[connection signal="i_am_dead" from="Dash" to="Death" method="_on_dash_i_am_dead"]
 [connection signal="goal_entred" from="Goal" to="." method="goal_entred"]

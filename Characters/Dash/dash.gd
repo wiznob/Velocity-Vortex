@@ -20,11 +20,15 @@ var _camera_input_direction := Vector2.ZERO
 var _last_movement_direction := Vector3.BACK
 var _gravity := -30.0
 var attacking = false
+var health = 3
+var damage_health_value = 3 
+signal i_am_dead
 
 #Get camera ready 
 @onready var _camera_pivot: Node3D = %CameraPivot
 @onready var _camera: Camera3D = %Camera3D
-@onready var _skin
+@onready var damage_health = $healthBar/damageBar
+@onready var timer_health = $healthBar/healthTimer
 
 #Capture mouse when left click is pressed 
 func _input(event: InputEvent) -> void:
@@ -106,7 +110,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 	#Rotation
-	$Rotate.rotation.y = lerp($Rotate.rotation.y, atan2(-velocity.x, -velocity.z), delta * acceleration)
+	$Rotate.rotation.y = lerp($Rotate.rotation.y, atan2(-velocity.x, -velocity.z), delta * rotation_speed)
 
 	#Enabling attack box
 	if Input.is_action_just_pressed("attack"):
@@ -130,3 +134,11 @@ func _on_hurt_area_area_entered(area):
 		velocity = direction * wall_jump_impulse
 		velocity.y = jump_impulse
 		current_jumps = 2
+		health -= 1
+		$healthBar.value -= 1
+		timer_health.start()
+		if health == 0:
+			i_am_dead.emit()
+
+func _on_health_timer_timeout():
+	$healthBar/damageBar.value = health
