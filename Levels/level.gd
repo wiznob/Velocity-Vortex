@@ -9,7 +9,7 @@ func _on_goal_goal_entred():
 #Boundary
 func _on_body_entered(body):# Death plane
 	if body.name == "Dash":
-		var death_node = get_node("../Death") # Adjust the path as necessary
+		var death_node = get_node("../Death")
 		if death_node != null:
 			death_node._out_of_bounds()
 		else:
