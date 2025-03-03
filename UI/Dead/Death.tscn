@@ -59,6 +59,12 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 28
 text = "Retry"
 
+[node name="CheckPoint" type="Button" parent="VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Continue at Checkpoint"
+
 [node name="Quit" type="Button" parent="VBoxContainer"]
 process_mode = 3
 layout_mode = 2
@@ -66,4 +72,5 @@ theme_override_font_sizes/font_size = 28
 text = "Main menu"
 
 [connection signal="pressed" from="VBoxContainer/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="VBoxContainer/CheckPoint" to="." method="_on_check_point_pressed"]
 [connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]

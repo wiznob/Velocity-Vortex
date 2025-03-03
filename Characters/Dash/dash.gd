@@ -17,7 +17,6 @@ extends CharacterBody3D
 @export var wall_friction := 0.8
 @export var max_wall_friction :=  2.0
 var _camera_input_direction := Vector2.ZERO
-var _last_movement_direction := Vector3.BACK
 var _gravity := -30.0
 var attacking = false
 var health = 3
@@ -110,7 +109,12 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 	#Rotation
-	$Rotate.rotation.y = lerp($Rotate.rotation.y, atan2(-velocity.x, -velocity.z), delta * rotation_speed)
+	var last_input_direction = $Rotate.rotation.y
+	if velocity.length() > 0.01:
+		last_input_direction = atan2(-velocity.x, -velocity.z)
+	$Rotate.rotation.y = lerp($Rotate.rotation.y, last_input_direction, delta * rotation_speed)
+
+
 
 	#Enabling attack box
 	if Input.is_action_just_pressed("attack"):
@@ -142,3 +146,9 @@ func _on_hurt_area_area_entered(area):
 
 func _on_health_timer_timeout():
 	$healthBar/damageBar.value = health
+
+
+func _on_death_checkpoint_used():
+	health = 3
+	$healthBar/damageBar.value = health
+	$healthBar.value = health

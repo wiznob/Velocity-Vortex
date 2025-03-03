@@ -1,4 +1,10 @@
 extends Control
+var checkpoint_manager
+var player
+signal checkpoint_used
+func _ready():
+	player = get_parent().get_node("Dash")
+	checkpoint_manager = get_parent().get_node("CheckPointManager")
 
 func _on_quit_pressed():
 	get_tree().paused = false
@@ -21,3 +27,9 @@ func _out_of_bounds():
 		visible = true
 		get_tree().paused = true
 		$VBoxContainer/Restart.grab_focus()
+
+func _on_check_point_pressed():
+	player.position = checkpoint_manager.last_location
+	visible = false
+	get_tree().paused = false
+	checkpoint_used.emit()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cp5ol73urfxhp"]
+[gd_scene load_steps=21 format=3 uid="uid://cp5ol73urfxhp"]
 
 [ext_resource type="Material" uid="uid://bylod678k4nnp" path="res://textures/test/black-test.tres" id="1_8m3dn"]
 [ext_resource type="Script" path="res://Levels/level.gd" id="1_nw803"]
@@ -14,6 +14,8 @@
 [ext_resource type="PackedScene" uid="uid://b454mlw8lfllt" path="res://Characters/enemies/Shooter/GroundEnemy.tscn" id="11_3bgf4"]
 [ext_resource type="PackedScene" uid="uid://d0jeu7c1ii0j6" path="res://Characters/enemies/Roller/Roller.tscn" id="11_cs2ul"]
 [ext_resource type="PackedScene" uid="uid://lo1phssu8xxv" path="res://Models/BounceOrb.tscn" id="13_v1saq"]
+[ext_resource type="PackedScene" uid="uid://ds8f6n1bacdvq" path="res://Models/Checkpoint/Checkpoint.tscn" id="15_4hvwy"]
+[ext_resource type="PackedScene" uid="uid://drt6hf3ybngw0" path="res://Models/Checkpoint/CheckPointManager.tscn" id="15_ux51s"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hqev7"]
 
@@ -128,5 +130,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.32, 1.2492, -8.8172)
 [node name="BounceOrb4" parent="." instance=ExtResource("13_v1saq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.2091, 1.2492, -8.8172)
 
+[node name="CheckPointManager" parent="." instance=ExtResource("15_ux51s")]
+
+[node name="CheckPoint" parent="CheckPointManager" instance=ExtResource("15_4hvwy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.90137, 1.56516, -6.035)
+
+[connection signal="checkpoint_used" from="Death" to="Dash" method="_on_death_checkpoint_used"]
 [connection signal="i_am_dead" from="Dash" to="Death" method="_on_dash_i_am_dead"]
 [connection signal="goal_entred" from="Goal" to="." method="goal_entred"]
