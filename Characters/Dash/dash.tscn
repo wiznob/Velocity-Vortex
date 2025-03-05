@@ -10,7 +10,7 @@ height = 1.90975
 height = 1.89723
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8gswg"]
-size = Vector3(1, 1.43967, 0.782166)
+size = Vector3(1.48877, 1.43967, 1.28159)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cxubp"]
 
@@ -67,7 +67,7 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.522928, 0)
 
 [node name="AttackShape" type="CollisionShape3D" parent="Rotate/AttackArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.275723, 0.575714)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.111572, 0.275723, 0.825424)
 shape = SubResource("BoxShape3D_8gswg")
 disabled = true
 

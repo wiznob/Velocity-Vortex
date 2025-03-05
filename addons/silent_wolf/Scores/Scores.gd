@@ -37,7 +37,7 @@ var scores_below  = []
 #var request_timer = null
 
 # latest number of scores to be fetched from the backend
-var latest_max = 10
+var latest_max = 6
 
 var SaveScore = null
 var GetScores = null
@@ -61,7 +61,7 @@ var wrDeleteScore = null
 
 # metadata, if included should be a dictionary
 # The score attribute could be either a score_value (int) or score_id (String)
-func save_score(player_name: String, score, ldboard_name: String="main", metadata: Dictionary={}) -> Node:
+func save_score(player_name: String, score, ldboard_name: String=Global.Leaderboard, metadata: Dictionary={}) -> Node:
 	# player_name must be present
 	if player_name == null or player_name == "":
 		SWLogger.error("ERROR in SilentWolf.Scores.persist_score - please enter a valid player name")
@@ -115,7 +115,7 @@ func _on_SaveScore_request_completed(result, response_code, headers, body) -> vo
 		sw_save_score_complete.emit(sw_result)
 
 
-func get_scores(maximum: int=10, ldboard_name: String="main", period_offset: int=0) -> Node:
+func get_scores(maximum: int=6, ldboard_name: String=Global.Leaderboard, period_offset: int=0) -> Node:
 	var prepared_http_req = SilentWolf.prepare_http_request()
 	GetScores = prepared_http_req.request
 	wrGetScores = prepared_http_req.weakref
@@ -154,7 +154,7 @@ func _on_GetScores_request_completed(result, response_code, headers, body) -> vo
 		sw_get_scores_complete.emit(sw_result)
 
 
-func get_scores_by_player(player_name: String, maximum: int=10, ldboard_name: String="main", period_offset: int=0) -> Node:
+func get_scores_by_player(player_name: String, maximum: int=6, ldboard_name: String=Global.Leaderboard, period_offset: int=0) -> Node:
 	if player_name == null:
 		SWLogger.error("Error in SilentWolf.Scores.get_scores_by_player: provided player_name is null")
 	else:
@@ -190,7 +190,7 @@ func _on_GetScoresByPlayer_request_completed(result, response_code, headers, bod
 		sw_get_player_scores_complete.emit(sw_result)	
 
 
-func get_top_score_by_player(player_name: String, maximum: int=10, ldboard_name: String="main", period_offset: int=0) -> Node:
+func get_top_score_by_player(player_name: String, maximum: int=6, ldboard_name: String=Global.Leaderboard, period_offset: int=0) -> Node:
 	if player_name == null:
 		SWLogger.error("Error in SilentWolf.Scores.get_top_score_by_player: provided player_name is null")
 	else:
@@ -228,7 +228,7 @@ func _on_GetTopScoreByPlayer_request_completed(result, response_code, headers, b
 
 
 # The score attribute could be either a score_value (int) or score_id (Sstring)
-func get_score_position(score, ldboard_name: String="main") -> Node:
+func get_score_position(score, ldboard_name: String=Global.Leaderboard) -> Node:
 	var score_id = null
 	var score_value = null
 	print("score: " + str(score))
@@ -267,7 +267,7 @@ func _on_GetScorePosition_request_completed(result, response_code, headers, body
 
 
 # The score attribute couldd be either a score_value (int) or score_id (Sstring)
-func get_scores_around(score, scores_to_fetch=3, ldboard_name: String="main") -> Node:
+func get_scores_around(score, scores_to_fetch=3, ldboard_name: String=Global.Leaderboard) -> Node:
 	var score_id = "Null"
 	var score_value = "Null"
 	print("score: " + str(score))
@@ -361,7 +361,7 @@ func _on_WipeLeaderboard_request_completed(result, response_code, headers, body)
 		sw_wipe_leaderboard_complete.emit(sw_result)
 
 
-func add_to_local_scores(game_result: Dictionary, ld_name: String="main") -> void:
+func add_to_local_scores(game_result: Dictionary, ld_name: String=Global.Leaderboard) -> void:
 	var local_score = { "score_id": game_result.score_id, "game_id" : game_result.game_id, "player_name": game_result.player_name, "score": game_result.score }
 	local_scores.append(local_score)
 	SWLogger.debug("local scores: " + str(local_scores))

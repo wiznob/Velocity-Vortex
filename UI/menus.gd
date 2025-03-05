@@ -6,7 +6,7 @@ var final_time
 
 #Start of main menu
 func _on_play_pressed():
-	get_tree().change_scene_to_file("res://Levels/Level-1.tscn")
+	get_tree().change_scene_to_file("res://UI/LevelSelect/LevelSelect.tscn")
 
 func _on_options_pressed():
 	get_tree().change_scene_to_file("res://UI/Options/Options.tscn")
@@ -23,7 +23,7 @@ func _on_submit_pressed():
 	if $LineEdit.text != "":
 		player_name = $LineEdit.text
 		get_tree().paused = false
-		SilentWolf.Scores.save_score(player_name, final_time)
+		SilentWolf.Scores.save_score(player_name, final_time, Global.Leaderboard)
 		get_tree().change_scene_to_file("res://UI/leaderboard/NewLeaderboard.tscn")
 
 func _on_skip_pressed():

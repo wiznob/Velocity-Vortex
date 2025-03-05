@@ -2,6 +2,7 @@ extends Area3D
 
 var rotation_speed = 90
 var spin = false
+var checkpoint_used = false
 var checkpoint_manager
 
 func _ready():
@@ -23,7 +24,8 @@ func _process(delta):
 		rotation_degrees.y += rotation_speed * delta
 
 func _on_body_entered(body):
-	if body.name == "Dash":
+	if body.name == "Dash" and checkpoint_used == false:
+		checkpoint_used = true
 		checkpoint_manager.last_location = $RespawnPoint.global_position
 		spin = true
 		# Change the material of Edge and Hole

@@ -1,7 +1,7 @@
 extends Control
 signal final_time
 var total_time = 0
-var coins = 0
+var coins = Global.coins
 var current_time
 func _ready():
 	$Timer.wait_time = 0.01

@@ -40,11 +40,17 @@ text = "Camera sensitivity"
 
 [node name="CameraSlider" type="HSlider" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-max_value = 3.0
+min_value = 1.0
+max_value = 6.0
+value = 1.0
 
 [node name="MusicBox" type="CheckBox" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Music"
+
+[node name="anti-aliasing" type="CheckBox" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Anti-aliasing"
 
 [node name="Fullscreen" type="CheckBox" parent="MarginContainer/VBoxContainer"]
 process_mode = 3
@@ -58,5 +64,7 @@ text = "Back
 "
 script = ExtResource("3_undj6")
 
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/CameraSlider" to="." method="_on_camera_slider_value_changed"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/anti-aliasing" to="." method="_on_antialiasing_toggled"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/Fullscreen" to="." method="_on_fullscreen_toggled"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Back" to="." method="_on_back_pressed"]

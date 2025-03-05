@@ -7,6 +7,7 @@ height = 2.71969
 radius = 2.59906
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0v2no"]
+resource_local_to_scene = true
 transparency = 1
 blend_mode = 1
 albedo_color = Color(1, 1, 0, 1)
@@ -16,6 +17,7 @@ emission = Color(1, 1, 0, 1)
 emission_energy_multiplier = 0.5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ur31o"]
+resource_local_to_scene = true
 transparency = 1
 blend_mode = 1
 albedo_color = Color(1, 1, 0, 1)

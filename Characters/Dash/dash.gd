@@ -2,7 +2,7 @@ extends CharacterBody3D
 #Camera Exports 
 @export_group("Camera")
 @export_range(0.0, 1.0) var mouse_sensitivity := 0.25
-@export_range(0.0, 3.0) var controller_sensitivity := 3.00
+var controller_sensitivity  = Global.controller_sensitivity
 
 #Movement exports 
 @export_group("Movement")
@@ -129,6 +129,8 @@ func _on_attack_area_area_entered(area):
 	if area.is_in_group("enemies"):
 		if is_on_floor() == false:
 			velocity.y = jump_impulse
+	elif area.is_in_group("BlueOrb"):
+		velocity.y = 50
 
 # Taking damage
 func _on_hurt_area_area_entered(area):
