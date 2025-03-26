@@ -43,6 +43,11 @@ func _physics_process(delta):
 		direction_neg = - direction
 		velocity = velocity.move_toward(direction_neg * backup_speed, acceleration * delta)
 		move_and_slide()
+	else:
+		var y_velocity := velocity.y
+		velocity.y = 0.0
+		velocity.y = y_velocity + _gravity * delta
+		move_and_slide()
 
 func spawn():
 	if $SpawnTimer.is_stopped() == true:

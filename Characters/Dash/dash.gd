@@ -112,7 +112,8 @@ func _physics_process(delta: float) -> void:
 	var last_input_direction = $Rotate.rotation.y
 	if velocity.length() > 0.01:
 		last_input_direction = atan2(-velocity.x, -velocity.z)
-	$Rotate.rotation.y = lerp($Rotate.rotation.y, last_input_direction, delta * rotation_speed)
+	$Rotate.rotation.y = lerp_angle($Rotate.rotation.y, last_input_direction, delta * rotation_speed)
+
 
 
 

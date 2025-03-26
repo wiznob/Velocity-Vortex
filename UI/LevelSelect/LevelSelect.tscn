@@ -82,7 +82,7 @@ text = "Level 2"
 
 [node name="lvl3" type="Button" parent="MarginContainer/BoxContainer"]
 layout_mode = 2
-text = "Level3
+text = "Level 3
 "
 
 [connection signal="pressed" from="MarginContainer/BoxContainer/lvl1" to="." method="_on_lvl_1_pressed"]

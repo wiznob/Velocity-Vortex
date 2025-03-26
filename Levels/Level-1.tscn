@@ -1,13 +1,17 @@
-[gd_scene load_steps=12 format=3 uid="uid://uypdw3t0cwww"]
+[gd_scene load_steps=17 format=3 uid="uid://uypdw3t0cwww"]
 
 [ext_resource type="Material" uid="uid://bylod678k4nnp" path="res://textures/test/black-test.tres" id="1_gmh0x"]
 [ext_resource type="Script" path="res://Levels/level.gd" id="1_ji2j3"]
 [ext_resource type="PackedScene" uid="uid://g5yx4s6flap8" path="res://Characters/Dash/dash.tscn" id="1_xnpp4"]
 [ext_resource type="PackedScene" uid="uid://bfikvyvylhkq" path="res://UI/Pause/pause_menu.tscn" id="2_a5dyt"]
-[ext_resource type="PackedScene" uid="uid://cbs0m8anx3r3p" path="res://UI/Dash/dash_ui.tscn" id="2_b4vwy"]
 [ext_resource type="PackedScene" uid="uid://bbxai2rtn4yfm" path="res://Levels/OutOfBounds.tscn" id="2_vgyxa"]
 [ext_resource type="PackedScene" uid="uid://coiul1xe4gccj" path="res://UI/Dead/Death.tscn" id="3_s31b8"]
 [ext_resource type="PackedScene" uid="uid://drt6hf3ybngw0" path="res://Models/Checkpoint/CheckPointManager.tscn" id="7_ih6tg"]
+[ext_resource type="PackedScene" uid="uid://lo1phssu8xxv" path="res://Models/BounceOrb.tscn" id="9_ei10c"]
+[ext_resource type="PackedScene" uid="uid://ds8f6n1bacdvq" path="res://Models/Checkpoint/Checkpoint.tscn" id="9_eysuh"]
+[ext_resource type="PackedScene" uid="uid://b454mlw8lfllt" path="res://Characters/enemies/Shooter/GroundEnemy.tscn" id="10_khuj2"]
+[ext_resource type="PackedScene" uid="uid://d0jeu7c1ii0j6" path="res://Characters/enemies/Roller/Roller.tscn" id="11_wyars"]
+[ext_resource type="PackedScene" uid="uid://cbs0m8anx3r3p" path="res://UI/Dash/dash_ui.tscn" id="12_l3sk6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lvnov"]
 
@@ -19,6 +23,10 @@ background_mode = 2
 sky = SubResource("Sky_crtlb")
 glow_enabled = true
 fog_light_energy = 16.0
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_otdgo"]
+vertices = PackedVector3Array(-10.1108, 41.5, -151.351, -13.3608, 41.5, -150.101, -16.1108, 41.5, -147.851, -18.3608, 41.5, -143.101, -13.3608, 41.5, -131.851, -9.86082, 41.5, -130.601, -6.11082, 41.5, -130.601, -16.6108, 41.5, -134.851, -2.61082, 41.5, -150.101, -5.86082, 41.5, -151.351, -1.86082, 41.5, -132.351, 0.639177, 41.5, -134.851, 2.38918, 41.5, -139.101, 2.38918, 41.5, -142.851, -18.3608, 41.5, -138.851, 0.639177, 41.5, -147.101, -11.3608, 41.5, -128.601, -11.3608, 41.5, -113.601, -3.61082, 41.5, -114.101, -3.61082, 41.5, -128.601, -5.36082, 49, -113.101, -5.36082, 49, -88.851, -3.61082, 49, -88.851, -3.61082, 49, -113.101, -11.8608, 49, -111.851, -11.8608, 49, -89.351, -10.1108, 49, -89.351, -10.1108, 49, -111.851, -1.36082, 41.5, -88.601, -2.61082, 41.5, -88.601, -2.86082, 41.5, -87.851, -1.36082, 41.5, -75.851, -6.11082, 41.5, -87.851, -6.36082, 41.5, -88.601, -15.1108, 41.5, -88.601, -15.1108, 41.5, -75.851, -15.1108, 41.5, -63.101, -15.1108, 41.5, -39.351, -1.36082, 41.5, -39.351, -1.36082, 41.5, -63.101, -15.1108, 4, -33.101, -15.1108, 4, -23.101, -1.36082, 4, -23.101, -1.36082, 4, -33.101, -15.1108, 1.5, -22.101, -15.1108, 1.5, -12.351, -1.36082, 1.5, -12.351, -1.36082, 1.5, -22.101, -15.1108, 1, -11.351, -15.1108, 1, 6.89903, -1.36082, 1, 6.89903, -1.36082, 1, -11.351)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(5, 4, 6), PackedInt32Array(6, 4, 7), PackedInt32Array(0, 9, 8), PackedInt32Array(10, 6, 11), PackedInt32Array(11, 6, 12), PackedInt32Array(12, 6, 13), PackedInt32Array(8, 13, 0), PackedInt32Array(0, 13, 3), PackedInt32Array(3, 13, 7), PackedInt32Array(7, 13, 6), PackedInt32Array(7, 14, 3), PackedInt32Array(8, 15, 13), PackedInt32Array(19, 18, 16), PackedInt32Array(16, 18, 17), PackedInt32Array(23, 22, 20), PackedInt32Array(20, 22, 21), PackedInt32Array(27, 26, 24), PackedInt32Array(24, 26, 25), PackedInt32Array(29, 28, 30), PackedInt32Array(30, 28, 31), PackedInt32Array(34, 33, 32), PackedInt32Array(34, 32, 35), PackedInt32Array(35, 32, 31), PackedInt32Array(31, 32, 30), PackedInt32Array(39, 38, 36), PackedInt32Array(36, 38, 37), PackedInt32Array(43, 42, 40), PackedInt32Array(40, 42, 41), PackedInt32Array(47, 46, 44), PackedInt32Array(44, 46, 45), PackedInt32Array(51, 50, 48), PackedInt32Array(48, 50, 49)]
 
 [node name="Level-1" type="Node3D"]
 script = ExtResource("1_ji2j3")
@@ -37,20 +45,57 @@ transform = Transform3D(0.653051, -0.3317, 0.680809, 0, 0.898978, 0.437995, -0.7
 shadow_enabled = true
 shadow_bias = 0.0
 
-[node name="Dash" parent="." instance=ExtResource("1_xnpp4")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -7.424, 0.5, 5.78354)
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_otdgo")
 
-[node name="DashUI" parent="Dash" instance=ExtResource("2_b4vwy")]
-metadata/_edit_use_anchors_ = true
-
-[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="NavigationRegion3D"]
 material_override = ExtResource("1_gmh0x")
 use_collision = true
 
-[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.17511, -0.5, 2.09137)
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.17511, -0.5, -2.18844)
+size = Vector3(14.4164, 2, 19.3769)
+material = ExtResource("1_gmh0x")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.17511, 0.178022, -17.2917)
 size = Vector3(14.4164, 2, 10.8173)
 material = ExtResource("1_gmh0x")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.17511, 2.13767, -28.0947)
+size = Vector3(14.4164, 2.88367, 10.8173)
+material = ExtResource("1_gmh0x")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.17511, 39.6591, -51.2457)
+size = Vector3(14.4164, 2.88367, 24.6357)
+material = ExtResource("1_gmh0x")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.17511, 39.6591, -82.1631)
+size = Vector3(14.4164, 2.88367, 13.5571)
+material = ExtResource("1_gmh0x")
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.53384, 39.6591, -121.079)
+size = Vector3(8.39628, 2.88367, 15.8203)
+material = ExtResource("1_gmh0x")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.9215, 43.3553, -100.529)
+size = Vector3(2.40254, 10.4407, 23.2091)
+material = ExtResource("1_gmh0x")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.53209, 43.4377, -101.039)
+size = Vector3(2.40254, 10.4407, 24.9647)
+material = ExtResource("1_gmh0x")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="NavigationRegion3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.00738, 40.0473, -140.998)
+radius = 10.8534
+sides = 40
 
 [node name="Boundary" parent="." instance=ExtResource("2_vgyxa")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, -63.8842, 11)
@@ -58,6 +103,23 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, -63.8842, 11)
 [node name="CheckPointManager" parent="." instance=ExtResource("7_ih6tg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15645, 19.3066, -62.5604)
 
+[node name="CheckPoint" parent="CheckPointManager" instance=ExtResource("9_eysuh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.52285, 22.4551, 17.8728)
+
 [node name="Enemies" type="Node3D" parent="."]
 
+[node name="BounceOrb" parent="Enemies" instance=ExtResource("9_ei10c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.05333, 3.98139, -34.8281)
+
+[node name="GroundEnemy" parent="Enemies" instance=ExtResource("10_khuj2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.77622, 42.1486, -143.469)
+
+[node name="Roller" parent="Enemies" instance=ExtResource("11_wyars")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.3661, 42.1331, -140.327)
+
 [node name="Coins" type="Node3D" parent="."]
+
+[node name="Dash" parent="." instance=ExtResource("1_xnpp4")]
+transform = Transform3D(-0.999326, 0, -0.0367134, 0, 1, 0, 0.0367134, 0, -0.999326, -6.06865, 41.101, -56.93)
+
+[node name="DashUI" parent="Dash" instance=ExtResource("12_l3sk6")]
