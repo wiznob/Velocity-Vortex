@@ -3,9 +3,6 @@ extends Node3D
 #@author W.O
 #November 2024
 
-func _on_goal_goal_entred():
-	pass
-
 #Boundary
 func _on_body_entered(body):# Death plane
 	if body.name == "Dash":

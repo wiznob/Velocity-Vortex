@@ -20,7 +20,7 @@ var _camera_input_direction := Vector2.ZERO
 var _gravity := -30.0
 var attacking = false
 var health = 3
-var damage_health_value = 3 
+var damage_health_value = 3
 signal i_am_dead
 
 #Get camera ready 
@@ -28,6 +28,7 @@ signal i_am_dead
 @onready var _camera: Camera3D = %Camera3D
 @onready var damage_health = $healthBar/damageBar
 @onready var timer_health = $healthBar/healthTimer
+@onready var attack_timer = $AttackTimer
 
 #Capture mouse when left click is pressed 
 func _input(event: InputEvent) -> void:
@@ -120,10 +121,12 @@ func _physics_process(delta: float) -> void:
 	#Enabling attack box
 	if Input.is_action_just_pressed("attack"):
 		attacking = true
-		$Rotate/AttackArea/AttackShape.disabled = false 
-	else:
-		attacking = false
-		$Rotate/AttackArea/AttackShape.disabled = true
+		$Rotate/AttackArea/AttackShape.disabled = false
+		attack_timer.start()
+
+func _on_attack_timer_timeout():
+	attacking = false
+	$Rotate/AttackArea/AttackShape.disabled = true
 
 #Checking if attack connected
 func _on_attack_area_area_entered(area):

@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://lloqql7j0lod"]
+
+[ext_resource type="PackedScene" uid="uid://bfpr1xli43flo" path="res://Models/Goal/Untitled.glb" id="1_02aod"]
+
+[sub_resource type="GDScript" id="GDScript_x6itb"]
+script/source = "extends Node3D
+
+@export var speed = 3 
+@export var amplitude = 0.5
+# Track time passed 
+var time_passed = 0.0
+# will save the starting y-position of the object
+var original_y = 0.0
+func _ready():
+	# Save the object's starting y-position
+	original_y = position.y
+
+func _process(delta):
+	# Inrease elapsed time
+	time_passed += delta * speed
+	var new_y = original_y + sin(time_passed) * amplitude
+	#Update vertical movement
+	position.y = new_y
+	# Rotate the Crystal node
+	$Crystal.rotate_y(speed * delta)
+"
+
+[node name="Node3D" type="Node3D"]
+script = SubResource("GDScript_x6itb")
+
+[node name="Crystal" parent="." instance=ExtResource("1_02aod")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)

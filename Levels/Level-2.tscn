@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://btht3atw40fvc"]
+
+[ext_resource type="Material" uid="uid://bylod678k4nnp" path="res://textures/test/black-test.tres" id="1_gs2lt"]
+[ext_resource type="PackedScene" uid="uid://by0ka1itjerie" path="res://Models/Goal/goal.tscn" id="2_jgplf"]
+[ext_resource type="PackedScene" uid="uid://dgwxh5blkfje" path="res://UI/Goal/Goal_UI.tscn" id="3_qyffv"]
+[ext_resource type="PackedScene" uid="uid://g5yx4s6flap8" path="res://Characters/Dash/dash.tscn" id="4_6iymw"]
+
+[node name="Level-2" type="Node3D"]
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+material_override = ExtResource("1_gs2lt")
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.17511, -0.5, -2.18844)
+size = Vector3(14.4164, 2, 19.3769)
+material = ExtResource("1_gs2lt")
+
+[node name="Goal" parent="." instance=ExtResource("2_jgplf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.19019, 43.0965, -166.397)
+
+[node name="GoalUI" parent="Goal" instance=ExtResource("3_qyffv")]
+
+[node name="Dash" parent="." instance=ExtResource("4_6iymw")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -7.75251, 0.702293, 3.14748)

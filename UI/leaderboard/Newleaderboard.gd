@@ -19,15 +19,12 @@ func _ready():
 		scores = SilentWolf.Scores.leaderboards[ld_name]
 	var local_scores = SilentWolf.Scores.local_scores
 	
-	if len(scores) > 0: 
-		render_board(scores, local_scores)
-	else:
-		# use a signal to notify when the high scores have been returned, and show a "loading" animation until it's the case...
-		add_loading_scores_message()
-		var sw_result = await SilentWolf.Scores.get_scores().sw_get_scores_complete
-		scores = sw_result.scores
-		hide_message()
-		render_board(scores, local_scores)
+	# use a signal to notify when the high scores have been returned, and show a "loading" animation until it's the case...
+	add_loading_scores_message()
+	var sw_result = await SilentWolf.Scores.get_scores().sw_get_scores_complete
+	scores = sw_result.scores
+	hide_message()
+	render_board(scores, local_scores)
 
 
 func render_board(scores: Array, local_scores: Array) -> void:

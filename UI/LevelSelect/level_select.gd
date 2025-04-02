@@ -17,7 +17,7 @@ func _on_lvl_2_pressed():
 		$Error.text = error_text
 	else:
 		pass
-		#get_tree().change_scene_to_file("res://Levels/Level-1.tscn")
+		get_tree().change_scene_to_file("res://Levels/Level-2.tscn")
 
 
 func _on_lvl_3_pressed():
