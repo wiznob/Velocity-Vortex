@@ -38,5 +38,9 @@ disabled = true
 wait_time = 2.0
 autostart = true
 
+[node name="HitBoxTimer" type="Timer" parent="."]
+wait_time = 0.1
+
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="HitBoxTimer" to="." method="_on_hit_box_timer_timeout"]

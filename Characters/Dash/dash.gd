@@ -135,6 +135,8 @@ func _on_attack_area_area_entered(area):
 			velocity.y = jump_impulse
 	elif area.is_in_group("BlueOrb"):
 		velocity.y = 50
+	elif area.is_in_group("RedOrb"):
+		velocity.y = 20
 
 # Taking damage
 func _on_hurt_area_area_entered(area):

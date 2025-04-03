@@ -32,6 +32,7 @@ bothSides=""
 EnemyAttack=""
 PlayerHit=""
 BlueOrb=""
+RedOrb=""
 
 [input]
 

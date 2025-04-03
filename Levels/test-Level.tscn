@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cp5ol73urfxhp"]
+[gd_scene load_steps=23 format=3 uid="uid://cp5ol73urfxhp"]
 
 [ext_resource type="Material" uid="uid://bylod678k4nnp" path="res://textures/test/black-test.tres" id="1_8m3dn"]
 [ext_resource type="Script" path="res://Levels/level.gd" id="1_nw803"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://ds8f6n1bacdvq" path="res://Models/Checkpoint/Checkpoint.tscn" id="15_4hvwy"]
 [ext_resource type="PackedScene" uid="uid://drt6hf3ybngw0" path="res://Models/Checkpoint/CheckPointManager.tscn" id="15_ux51s"]
 [ext_resource type="PackedScene" uid="uid://lloqql7j0lod" path="res://Models/Goal/GoalSkin.tscn" id="17_xx6nu"]
+[ext_resource type="PackedScene" uid="uid://db8rij25mxvb1" path="res://Models/BounceOrbRed.tscn" id="18_jbhhm"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hqev7"]
 
@@ -141,6 +142,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.71155, 1.1417, 3.82834)
 
 [node name="Node3D" parent="." instance=ExtResource("17_xx6nu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.269826, 1.38569, 7.28454)
+
+[node name="BounceOrb5" parent="." instance=ExtResource("18_jbhhm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.0214, 0, 2.96679)
 
 [connection signal="checkpoint_used" from="Death" to="Dash" method="_on_death_checkpoint_used"]
 [connection signal="i_am_dead" from="Dash" to="Death" method="_on_dash_i_am_dead"]
