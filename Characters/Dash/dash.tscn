@@ -73,9 +73,13 @@ disabled = true
 
 [node name="healthBar" type="ProgressBar" parent="."]
 z_index = 1
-offset_top = 586.0
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -62.0
 offset_right = 225.0
-offset_bottom = 604.0
+offset_bottom = -44.0
+grow_vertical = 0
 theme_override_styles/background = SubResource("StyleBoxEmpty_cxubp")
 theme_override_styles/fill = SubResource("StyleBoxFlat_uohk8")
 max_value = 3.0
