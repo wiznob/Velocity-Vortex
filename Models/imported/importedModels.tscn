@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://cc1rupo6hpdeq"]
+
+[ext_resource type="PackedScene" uid="uid://cn3qbdiog30ul" path="res://Models/imported/futuristic low poly city by niko.glb" id="1_56trx"]
+
+[node name="futuristic low poly city by niko" instance=ExtResource("1_56trx")]

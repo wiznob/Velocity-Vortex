@@ -1,0 +1,5 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://qwcwlyqec7cy"]
+
+[resource]
+resource_name = "barrier"
+cull_mode = 2

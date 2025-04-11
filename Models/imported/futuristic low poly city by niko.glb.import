@@ -31,6 +31,45 @@ animation/trimming=false
 animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
 import_script/path=""
-_subresources={}
+_subresources={
+"materials": {
+"barrier": {
+"use_external/enabled": true,
+"use_external/path": "res://Models/imported/materials/barrier.tres"
+},
+"blue": {
+"use_external/enabled": true,
+"use_external/path": "res://Models/imported/materials/blue.tres"
+},
+"copper": {
+"use_external/enabled": true,
+"use_external/path": "res://Models/imported/materials/copper.tres"
+},
+"energy": {
+"use_external/enabled": true,
+"use_external/path": "res://Models/imported/materials/energy.tres"
+},
+"gray": {
+"use_external/enabled": true,
+"use_external/path": "res://Models/imported/materials/gray.tres"
+},
+"green": {
+"use_external/enabled": true,
+"use_external/path": "res://Models/imported/materials/green.tres"
+},
+"lights": {
+"use_external/enabled": true,
+"use_external/path": "res://Models/imported/materials/lights.tres"
+},
+"metalic dark gray": {
+"use_external/enabled": true,
+"use_external/path": "res://Models/imported/materials/metalic dark gray.tres"
+},
+"metalic light gray": {
+"use_external/enabled": true,
+"use_external/path": "res://Models/imported/materials/metalic light gray.tres"
+}
+}
+}
 gltf/naming_version=1
 gltf/embedded_image_handling=1

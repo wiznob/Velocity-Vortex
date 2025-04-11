@@ -1,0 +1,5 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://mvplyat5b38b"]
+
+[resource]
+resource_name = "metalic light gray"
+cull_mode = 2
