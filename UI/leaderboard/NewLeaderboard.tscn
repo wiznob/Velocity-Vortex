@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://b7o8e0ue7f2e"]
+[gd_scene load_steps=7 format=3 uid="uid://b7o8e0ue7f2e"]
 
 [ext_resource type="Script" path="res://UI/leaderboard/Newleaderboard.gd" id="1_p05eq"]
 [ext_resource type="Theme" uid="uid://dhq1th0sqj2u7" path="res://UI/Fonts/Text_font.tres" id="2_0av4p"]
+[ext_resource type="PackedScene" uid="uid://c7b7w3kk3hs66" path="res://UI/background.tscn" id="2_bp24a"]
 [ext_resource type="PackedScene" uid="uid://clllbf6am8qdf" path="res://addons/silent_wolf/common/SWButton.tscn" id="3_x2und"]
 [ext_resource type="Script" path="res://UI/focusUI.gd" id="4_i4ihm"]
 
@@ -19,6 +20,9 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("1_p05eq")
+
+[node name="Background" parent="." instance=ExtResource("2_bp24a")]
+layout_mode = 1
 
 [node name="OldBoard" type="MarginContainer" parent="."]
 visible = false

@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dj838715r5a5h"]
+[gd_scene load_steps=7 format=3 uid="uid://dj838715r5a5h"]
 
 [ext_resource type="FontFile" uid="uid://cvs2kj5ouuwty" path="res://UI/Fonts/toxigenesis.rg-bold.otf" id="1_5u6jt"]
 [ext_resource type="Script" path="res://UI/LevelSelect/level_select.gd" id="1_b0fhx"]
+[ext_resource type="PackedScene" uid="uid://c7b7w3kk3hs66" path="res://UI/background.tscn" id="2_0grt6"]
 [ext_resource type="Theme" uid="uid://dhq1th0sqj2u7" path="res://UI/Fonts/Text_font.tres" id="2_hkpcn"]
 [ext_resource type="Script" path="res://UI/focusUI.gd" id="3_was6a"]
 
@@ -23,6 +24,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_b0fhx")
+
+[node name="Background" parent="." instance=ExtResource("2_0grt6")]
+layout_mode = 1
 
 [node name="Error" type="Label" parent="."]
 layout_mode = 1
@@ -85,6 +89,26 @@ layout_mode = 2
 text = "Level 3
 "
 
+[node name="Back" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -52.0
+offset_top = -148.0
+offset_right = 52.0
+offset_bottom = -97.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 4
+theme = ExtResource("2_hkpcn")
+text = "Back
+"
+script = ExtResource("3_was6a")
+
 [connection signal="pressed" from="MarginContainer/BoxContainer/lvl1" to="." method="_on_lvl_1_pressed"]
 [connection signal="pressed" from="MarginContainer/BoxContainer/lvl2" to="." method="_on_lvl_2_pressed"]
 [connection signal="pressed" from="MarginContainer/BoxContainer/lvl3" to="." method="_on_lvl_3_pressed"]
+[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]

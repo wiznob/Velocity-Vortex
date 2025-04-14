@@ -27,3 +27,7 @@ func _on_lvl_3_pressed():
 	else:
 		Global.Leaderboard = "level-3"
 		#get_tree().change_scene_to_file("res://Levels/Level-1.tscn")
+
+
+func _on_back_pressed():
+	get_tree().change_scene_to_file("res://UI/MainMenu.tscn")
