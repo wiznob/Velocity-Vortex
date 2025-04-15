@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bvnquwfkypr1v"]
+[gd_scene load_steps=5 format=3 uid="uid://bvnquwfkypr1v"]
 
 [ext_resource type="Script" path="res://Models/Coin/coin.gd" id="1_ku4p2"]
 [ext_resource type="PackedScene" uid="uid://k8qmp084asqr" path="res://Models/Coin/skin/coin_skin.tscn" id="2_sv714"]
+[ext_resource type="AudioStream" uid="uid://0cbu14vusxx4" path="res://audio/CoinPickUp.mp3" id="3_t3xvy"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_32mq3"]
 radius = 0.300719
@@ -19,4 +20,11 @@ shape = SubResource("SphereShape3D_32mq3")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_t3xvy")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.7
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

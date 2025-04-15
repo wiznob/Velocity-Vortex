@@ -1,7 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://cbs0m8anx3r3p"]
+[gd_scene load_steps=7 format=3 uid="uid://cbs0m8anx3r3p"]
 
 [ext_resource type="Script" path="res://UI/Dash/dash_ui.gd" id="1_o35jp"]
 [ext_resource type="FontFile" uid="uid://cvs2kj5ouuwty" path="res://UI/Fonts/toxigenesis.rg-bold.otf" id="1_t1yim"]
+[ext_resource type="Texture2D" uid="uid://buuxh2sjhnv8s" path="res://UI/Dash/Aicon.png" id="3_cs2t4"]
+[ext_resource type="Texture2D" uid="uid://dkrefdmwhd6ox" path="res://UI/Dash/timer.png" id="3_usnmj"]
+[ext_resource type="Theme" uid="uid://6y0ya30tvelk" path="res://UI/Dash/UIBackGround.tres" id="3_yrk4a"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_gbbls"]
 font = ExtResource("1_t1yim")
@@ -14,19 +17,56 @@ grow_vertical = 2
 script = ExtResource("1_o35jp")
 
 [node name="timerLabel" type="Label" parent="."]
+z_index = -1
 layout_mode = 0
-offset_right = 108.0
-offset_bottom = 40.0
+offset_left = 47.0
+offset_top = 39.0
+offset_right = 155.0
+offset_bottom = 79.0
 text = "0:00:00"
 label_settings = SubResource("LabelSettings_gbbls")
 
-[node name="coinLabel" type="Label" parent="."]
+[node name="ProgressBar" type="ProgressBar" parent="timerLabel"]
+z_index = -1
 layout_mode = 0
-offset_top = 40.0
-offset_right = 108.0
-offset_bottom = 80.0
+offset_left = -46.0
+offset_top = -4.0
+offset_right = 103.0
+offset_bottom = 30.0
+theme = ExtResource("3_yrk4a")
+show_percentage = false
+
+[node name="TimerIcon" type="Sprite2D" parent="timerLabel"]
+texture_filter = 2
+position = Vector2(-30, 11)
+scale = Vector2(0.0566406, 0.0566406)
+texture = ExtResource("3_usnmj")
+
+[node name="coinLabel" type="Label" parent="."]
+z_index = -1
+layout_mode = 0
+offset_left = 47.0
+offset_top = 93.0
+offset_right = 155.0
+offset_bottom = 133.0
 text = "Coins: 0"
 label_settings = SubResource("LabelSettings_gbbls")
+
+[node name="ProgressBar" type="ProgressBar" parent="coinLabel"]
+z_index = -1
+layout_mode = 0
+offset_left = -47.0
+offset_top = -7.0
+offset_right = 103.0
+offset_bottom = 30.0
+theme = ExtResource("3_yrk4a")
+show_percentage = false
+
+[node name="CoinIcon" type="Sprite2D" parent="coinLabel"]
+texture_filter = 2
+position = Vector2(-30, 11)
+scale = Vector2(0.0349771, 0.0349771)
+texture = ExtResource("3_cs2t4")
 
 [node name="Timer" type="Timer" parent="."]
 

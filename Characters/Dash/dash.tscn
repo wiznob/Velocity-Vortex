@@ -28,7 +28,8 @@ expand_margin_top = 5.0
 expand_margin_right = 5.0
 expand_margin_bottom = 5.0
 shadow_color = Color(0, 0, 0, 0.27451)
-shadow_offset = Vector2(0, 1)
+shadow_size = 4
+shadow_offset = Vector2(6, 6)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k3mlt"]
 bg_color = Color(0.996078, 0, 0, 1)
@@ -72,7 +73,7 @@ shape = SubResource("BoxShape3D_8gswg")
 disabled = true
 
 [node name="healthBar" type="ProgressBar" parent="."]
-z_index = 1
+z_index = -1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0

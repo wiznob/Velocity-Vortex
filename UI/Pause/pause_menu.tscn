@@ -1,7 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://bfikvyvylhkq"]
+[gd_scene load_steps=5 format=3 uid="uid://bfikvyvylhkq"]
 
 [ext_resource type="Script" path="res://UI/Pause/pause_menu.gd" id="1_pfmh4"]
 [ext_resource type="Theme" uid="uid://dhq1th0sqj2u7" path="res://UI/Fonts/Text_font.tres" id="2_llpf8"]
+[ext_resource type="Shader" path="res://UI/Blur_menu.gdshader" id="2_s7324"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dl4wy"]
+shader = ExtResource("2_s7324")
+shader_parameter/blur_radius = 8
+shader_parameter/Darkness = 0.1
+shader_parameter/R = 0.0
+shader_parameter/G = 0.0
+shader_parameter/B = 0.0
+shader_parameter/blur_strength = 1.0
 
 [node name="PauseMenu" type="Control"]
 process_mode = 3
@@ -14,6 +24,7 @@ grow_vertical = 2
 script = ExtResource("1_pfmh4")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_dl4wy")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

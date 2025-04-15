@@ -1,0 +1,19 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://6y0ya30tvelk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6q7ru"]
+bg_color = Color(0.0705882, 0.658824, 0.65098, 0.690196)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0.0589131, 0.523681, 0.507089, 1)
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_size = 4
+shadow_offset = Vector2(6, 6)
+
+[resource]
+ProgressBar/styles/background = SubResource("StyleBoxFlat_6q7ru")
