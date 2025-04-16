@@ -1,9 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://uypdw3t0cwww"]
+[gd_scene load_steps=19 format=3 uid="uid://uypdw3t0cwww"]
 
 [ext_resource type="Material" uid="uid://bylod678k4nnp" path="res://textures/test/black-test.tres" id="1_gmh0x"]
 [ext_resource type="Script" path="res://Levels/level.gd" id="1_o68lh"]
 [ext_resource type="PackedScene" uid="uid://g5yx4s6flap8" path="res://Characters/Dash/dash.tscn" id="1_xnpp4"]
 [ext_resource type="PackedScene" uid="uid://bfikvyvylhkq" path="res://UI/Pause/pause_menu.tscn" id="2_a5dyt"]
+[ext_resource type="Texture2D" uid="uid://hmg0ln8sgjfi" path="res://Levels/skybox.png" id="2_ttkin"]
 [ext_resource type="PackedScene" uid="uid://bbxai2rtn4yfm" path="res://Levels/OutOfBounds.tscn" id="2_vgyxa"]
 [ext_resource type="PackedScene" uid="uid://coiul1xe4gccj" path="res://UI/Dead/Death.tscn" id="3_s31b8"]
 [ext_resource type="PackedScene" uid="uid://drt6hf3ybngw0" path="res://Models/Checkpoint/CheckPointManager.tscn" id="7_ih6tg"]
@@ -14,10 +15,12 @@
 [ext_resource type="PackedScene" uid="uid://by0ka1itjerie" path="res://Models/Goal/goal.tscn" id="13_mnhha"]
 [ext_resource type="PackedScene" uid="uid://dgwxh5blkfje" path="res://UI/Goal/Goal_UI.tscn" id="14_b5o03"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lvnov"]
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_n1n2i"]
+ground_color = Color(0, 0.238806, 0.22219, 1)
+night_sky = ExtResource("2_ttkin")
 
 [sub_resource type="Sky" id="Sky_hb0yy"]
-sky_material = SubResource("ProceduralSkyMaterial_lvnov")
+sky_material = SubResource("PhysicalSkyMaterial_n1n2i")
 
 [sub_resource type="Environment" id="Environment_ov8pf"]
 background_mode = 2

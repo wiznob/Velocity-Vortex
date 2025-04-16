@@ -22,13 +22,13 @@ var attacking = false
 var health = 3
 var damage_health_value = 3
 signal i_am_dead
-
 #Get camera ready 
 @onready var _camera_pivot: Node3D = %CameraPivot
 @onready var _camera: Camera3D = %Camera3D
 @onready var damage_health = $healthBar/damageBar
 @onready var timer_health = $healthBar/healthTimer
 @onready var attack_timer = $AttackTimer
+@onready var dash_skin = $Rotate/Dash
 
 #Capture mouse when left click is pressed 
 func _input(event: InputEvent) -> void:
@@ -102,7 +102,9 @@ func _physics_process(delta: float) -> void:
 	elif is_on_wall_only():#Wall run
 		#velocity.x *= wall_friction
 		velocity.y *= wall_friction
-	elif is_starting_jump:
+	else:
+		pass
+	if is_starting_jump:
 		velocity.y = jump_impulse
 		current_jumps += 1
 	elif is_on_floor():

@@ -11,10 +11,10 @@
 [ext_resource type="PackedScene" uid="uid://ds8f6n1bacdvq" path="res://Models/Checkpoint/Checkpoint.tscn" id="9_api2x"]
 [ext_resource type="PackedScene" uid="uid://bbxai2rtn4yfm" path="res://Levels/OutOfBounds.tscn" id="10_awxoa"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qmfow"]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qte4v"]
 
 [sub_resource type="Sky" id="Sky_be6o3"]
-sky_material = SubResource("ProceduralSkyMaterial_qmfow")
+sky_material = SubResource("ProceduralSkyMaterial_qte4v")
 
 [sub_resource type="Environment" id="Environment_fuoxv"]
 background_mode = 2
