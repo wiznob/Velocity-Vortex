@@ -21,6 +21,7 @@ var _gravity := -30.0
 var attacking = false
 var health = 3
 var damage_health_value = 3
+var other_animation
 signal i_am_dead
 #Get camera ready 
 @onready var _camera_pivot: Node3D = %CameraPivot
@@ -51,6 +52,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		if velocity.y > 0.0:
 			velocity.y *= 0.5
 func _physics_process(delta: float) -> void:
+	if other_animation == false:
+		dash_skin.play_idle()
+	else:
+		pass
 	#handling camera movement with controller
 	var right_stick_input := Input.get_vector("right_stick_left", "right_stick_right", "right_stick_up", "right_stick_down")
 	if right_stick_input != Vector2.ZERO:
@@ -79,9 +84,6 @@ func _physics_process(delta: float) -> void:
 	#yeahhh a sprint button works much better.....
 	if sprint == true:
 		move_speed = boost_speed
-	else:
-		move_speed = 8.0
-	
 	#Jump logic
 	var is_starting_jump := Input.is_action_just_pressed("jump") and (is_on_floor() or current_jumps < max_jumps)
 	if Input.is_action_just_pressed("jump") and is_on_wall_only():#wall jump
@@ -100,10 +102,10 @@ func _physics_process(delta: float) -> void:
 		#sticky jump?
 		# wall_friction *= delta
 	elif is_on_wall_only():#Wall run
-		#velocity.x *= wall_friction
 		velocity.y *= wall_friction
+		#dash_skin.rotation = Vector3(10,3,10)
 	else:
-		pass
+		dash_skin.rotation = Vector3.ZERO
 	if is_starting_jump:
 		velocity.y = jump_impulse
 		current_jumps += 1
@@ -125,7 +127,17 @@ func _physics_process(delta: float) -> void:
 		attacking = true
 		$Rotate/AttackArea/AttackShape.disabled = false
 		attack_timer.start()
-
+	
+	#animations
+	var jog_anim = (velocity.x > 0 or velocity.x < 0 or velocity.z > 0 or velocity.z < 0) and is_on_floor() and not Input.is_action_pressed("run")
+	var run_anim = (velocity.x > 0 or velocity.x < 0 or velocity.z > 0 or velocity.z < 0) and is_on_floor() and Input.is_action_pressed("run")
+	if jog_anim == true:
+		other_animation = true
+		dash_skin.play_jog()
+	elif run_anim == true:
+		dash_skin.play_run()
+	else:
+		other_animation = false
 func _on_attack_timer_timeout():
 	attacking = false
 	$Rotate/AttackArea/AttackShape.disabled = true

@@ -1,8 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://dgwxh5blkfje"]
+[gd_scene load_steps=7 format=3 uid="uid://dgwxh5blkfje"]
 
 [ext_resource type="FontFile" uid="uid://cvs2kj5ouuwty" path="res://UI/Fonts/toxigenesis.rg-bold.otf" id="1_cy7vy"]
 [ext_resource type="Theme" uid="uid://dhq1th0sqj2u7" path="res://UI/Fonts/Text_font.tres" id="1_qdbyt"]
 [ext_resource type="Script" path="res://UI/menus.gd" id="1_sk65e"]
+[ext_resource type="Shader" path="res://UI/Blur_menu.gdshader" id="2_x457k"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ayjqv"]
+shader = ExtResource("2_x457k")
+shader_parameter/blur_radius = 8
+shader_parameter/Darkness = 0.1
+shader_parameter/R = 0.0
+shader_parameter/G = 0.0
+shader_parameter/B = 0.0
+shader_parameter/blur_strength = 1.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_8qt6c"]
 font = ExtResource("1_cy7vy")
@@ -20,6 +30,7 @@ grow_vertical = 2
 script = ExtResource("1_sk65e")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_ayjqv")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
