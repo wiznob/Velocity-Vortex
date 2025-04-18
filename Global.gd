@@ -1,5 +1,7 @@
 extends Node
 
+var audio_player
+var volume_db = 0
 var coins = 0
 var AA_on = false
 var fullscreen = false
@@ -13,7 +15,14 @@ func _ready():
 	"game_id": "VelocityVortex",
 	"log_level": 1
 	  })
-
 	SilentWolf.configure_scores({
 	"open_scene_on_close": "res://UI/MainMenu.tscn"
   })
+	audio_player = AudioStreamPlayer.new()
+	add_child(audio_player)
+	audio_player.stream = preload("res://audio/test-audio.mp3")
+	audio_player.play()
+	
+func set_volume(new_volume):
+	volume_db = new_volume
+	audio_player.volume_db = volume_db  # Adjust the volume

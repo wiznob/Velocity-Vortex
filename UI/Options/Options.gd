@@ -37,3 +37,12 @@ func _on_antialiasing_toggled(toggled_on):
 	else:
 		Global.AA_on = false
 		RenderingServer.viewport_set_use_taa(viewport.get_viewport_rid(), false)
+	
+func _on_music_box_toggled(toggled_on):
+	if toggled_on == true:
+		Global.audio_player.play()
+	else:
+		Global.audio_player.stop()
+
+func _on_music_slider_value_changed(value):
+	Global.set_volume(value)

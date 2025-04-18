@@ -19,9 +19,10 @@ var controller_sensitivity  = Global.controller_sensitivity
 var _camera_input_direction := Vector2.ZERO
 var _gravity := -30.0
 var attacking = false
+var attacking_anim = false
 var health = 3
 var damage_health_value = 3
-var other_animation
+var dead = false
 signal i_am_dead
 #Get camera ready 
 @onready var _camera_pivot: Node3D = %CameraPivot
@@ -29,6 +30,7 @@ signal i_am_dead
 @onready var damage_health = $healthBar/damageBar
 @onready var timer_health = $healthBar/healthTimer
 @onready var attack_timer = $AttackTimer
+@onready var attack_anim_timer = $AttackAnimation
 @onready var dash_skin = $Rotate/Dash
 
 #Capture mouse when left click is pressed 
@@ -52,10 +54,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		if velocity.y > 0.0:
 			velocity.y *= 0.5
 func _physics_process(delta: float) -> void:
-	if other_animation == false:
-		dash_skin.play_idle()
-	else:
-		pass
+	if dead == true:
+		return
 	#handling camera movement with controller
 	var right_stick_input := Input.get_vector("right_stick_left", "right_stick_right", "right_stick_up", "right_stick_down")
 	if right_stick_input != Vector2.ZERO:
@@ -110,7 +110,7 @@ func _physics_process(delta: float) -> void:
 		velocity.y = jump_impulse
 		current_jumps += 1
 	elif is_on_floor():
-		current_jumps = 0 #Reset jumps when on floor
+		current_jumps = 0 #Reset jumps when on floorg
 	move_and_slide()
 
 	#Rotation
@@ -125,19 +125,25 @@ func _physics_process(delta: float) -> void:
 	#Enabling attack box
 	if Input.is_action_just_pressed("attack"):
 		attacking = true
+		attacking_anim = true
 		$Rotate/AttackArea/AttackShape.disabled = false
 		attack_timer.start()
+		attack_anim_timer.start()
 	
 	#animations
-	var jog_anim = (velocity.x > 0 or velocity.x < 0 or velocity.z > 0 or velocity.z < 0) and is_on_floor() and not Input.is_action_pressed("run")
-	var run_anim = (velocity.x > 0 or velocity.x < 0 or velocity.z > 0 or velocity.z < 0) and is_on_floor() and Input.is_action_pressed("run")
-	if jog_anim == true:
-		other_animation = true
-		dash_skin.play_jog()
-	elif run_anim == true:
-		dash_skin.play_run()
+	if attacking_anim:
+		#Check attack first before everything else
+		dash_skin.play_attack()
 	else:
-		other_animation = false
+		#No attack? look for other animations statements 
+		if not is_on_floor():
+			dash_skin.play_jump()
+		elif Input.is_action_pressed("run") and velocity.length() > 0.01:
+			dash_skin.play_run()
+		elif velocity.length() > 0.01:
+			dash_skin.play_jog()
+		else:
+			dash_skin.play_idle()
 func _on_attack_timer_timeout():
 	attacking = false
 	$Rotate/AttackArea/AttackShape.disabled = true
@@ -164,13 +170,21 @@ func _on_hurt_area_area_entered(area):
 		$healthBar.value -= 1
 		timer_health.start()
 		if health == 0:
+			dead = true 
+			$".".process_mode = Node.PROCESS_MODE_ALWAYS
+			$".".set_process_input(false)
+			velocity = Vector3.ZERO
+			dash_skin.play_death()
 			i_am_dead.emit()
 
 func _on_health_timer_timeout():
 	$healthBar/damageBar.value = health
 
-
 func _on_death_checkpoint_used():
 	health = 3
 	$healthBar/damageBar.value = health
 	$healthBar.value = health
+
+
+func _on_attack_animation_timeout():
+	attacking_anim = false

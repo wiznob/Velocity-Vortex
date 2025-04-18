@@ -50,7 +50,19 @@ value = 1.0
 
 [node name="MusicBox" type="CheckBox" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+button_pressed = true
 text = "Music"
+
+[node name="Music" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Volume
+"
+
+[node name="MusicSlider" type="HSlider" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+min_value = -80.0
+max_value = 0.0
 
 [node name="anti-aliasing" type="CheckBox" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -69,6 +81,8 @@ text = "Back
 script = ExtResource("3_undj6")
 
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/CameraSlider" to="." method="_on_camera_slider_value_changed"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/MusicBox" to="." method="_on_music_box_toggled"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/anti-aliasing" to="." method="_on_antialiasing_toggled"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/Fullscreen" to="." method="_on_fullscreen_toggled"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Back" to="." method="_on_back_pressed"]
