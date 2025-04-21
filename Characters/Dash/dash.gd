@@ -80,10 +80,11 @@ func _physics_process(delta: float) -> void:
 	velocity.y = 0.0
 	velocity = velocity.move_toward(move_direction * move_speed, acceleration * delta)
 	velocity.y = y_velocity + _gravity * delta
-	
 	#yeahhh a sprint button works much better.....
 	if sprint == true:
 		move_speed = boost_speed
+	else:
+		move_speed = 8.0
 	#Jump logic
 	var is_starting_jump := Input.is_action_just_pressed("jump") and (is_on_floor() or current_jumps < max_jumps)
 	if Input.is_action_just_pressed("jump") and is_on_wall_only():#wall jump
@@ -129,21 +130,31 @@ func _physics_process(delta: float) -> void:
 		$Rotate/AttackArea/AttackShape.disabled = false
 		attack_timer.start()
 		attack_anim_timer.start()
-	
-	#animations
+
+# animations
 	if attacking_anim:
-		#Check attack first before everything else
 		dash_skin.play_attack()
+	elif is_on_wall_only():  # wall run
+		var wall_normal = get_wall_normal()
+		wall_normal.y = 0
+		wall_normal = wall_normal.normalized()
+		var tangent = wall_normal.cross(Vector3.UP).normalized()
+		var run_direction = (tangent + wall_normal).normalized()
+		var run_directionx = (tangent - wall_normal).normalized()
+		var target_y_rotation = atan2(run_directionx.x, run_direction.z)
+		dash_skin.rotation.y = lerp_angle(dash_skin.rotation.y, target_y_rotation, delta * rotation_speed)
+		dash_skin.rotation.z = lerp_angle(dash_skin.rotation.z, deg_to_rad(60), delta * rotation_speed)
+		dash_skin.play_run()
+
+	elif not is_on_floor() and not is_on_wall():
+		dash_skin.play_jump()
+	elif Input.is_action_pressed("run") and velocity.length() > 0.01:
+		dash_skin.play_run()
+	elif velocity.length() > 0.01:
+		dash_skin.play_jog()
 	else:
-		#No attack? look for other animations statements 
-		if not is_on_floor():
-			dash_skin.play_jump()
-		elif Input.is_action_pressed("run") and velocity.length() > 0.01:
-			dash_skin.play_run()
-		elif velocity.length() > 0.01:
-			dash_skin.play_jog()
-		else:
-			dash_skin.play_idle()
+		dash_skin.play_idle()
+
 func _on_attack_timer_timeout():
 	attacking = false
 	$Rotate/AttackArea/AttackShape.disabled = true
@@ -184,7 +195,6 @@ func _on_death_checkpoint_used():
 	health = 3
 	$healthBar/damageBar.value = health
 	$healthBar.value = health
-
 
 func _on_attack_animation_timeout():
 	attacking_anim = false
