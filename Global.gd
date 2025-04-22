@@ -27,6 +27,10 @@ func _ready():
 	#audio_player.stream = preload("res://audio/test-audio.mp3")
 	audio_player.volume_db = volume_db
 	audio_player.play()
+	audio_player.finished.connect(_on_audio_end)
+	
+func _on_audio_end():
+	audio_player.play()
 
 func set_volume(new_volume):
 	volume_db = new_volume

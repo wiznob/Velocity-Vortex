@@ -15,6 +15,8 @@ func _on_body_entered(body):# Death plane
 		body.queue_free()
 
 func goal_entred(): # When the player gets within goal range
+	Global.current_lvl +=1
+	Global.save_game()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	$Goal/GoalUI.visible = true
 	get_tree().paused = true
