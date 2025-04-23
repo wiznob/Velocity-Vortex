@@ -19,12 +19,12 @@
 ground_color = Color(0, 0.238806, 0.22219, 1)
 night_sky = ExtResource("2_ttkin")
 
-[sub_resource type="Sky" id="Sky_hb0yy"]
+[sub_resource type="Sky" id="Sky_tija3"]
 sky_material = SubResource("PhysicalSkyMaterial_n1n2i")
 
 [sub_resource type="Environment" id="Environment_ov8pf"]
 background_mode = 2
-sky = SubResource("Sky_hb0yy")
+sky = SubResource("Sky_tija3")
 glow_enabled = true
 fog_light_energy = 16.0
 

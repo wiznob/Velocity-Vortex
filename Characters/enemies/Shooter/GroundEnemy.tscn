@@ -34,7 +34,7 @@ shape = SubResource("SphereShape3D_s5bn4")
 shape = SubResource("SphereShape3D_kc0hu")
 
 [node name="Gun" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.282606, 0, 0, 0, 0.197353, 0, 0, 0, 0.572563, 0.506371, 0, 0.25651)
+transform = Transform3D(0.282606, 0, 0, 0, 0.197353, 0, 0, 0, 0.572563, 0.506371, 0, -0.082922)
 mesh = SubResource("BoxMesh_g3yed")
 skeleton = NodePath("../HurtBox/CollisionShape3D")
 

@@ -14,6 +14,14 @@ var direction = Vector3()
 @export var Knockback := 12
 @onready var nav = $NavigationAgent3D
 func _physics_process(delta):
+	velocity.y += _gravity * delta
+	#face player
+	if follow_player or shoot_mode:
+		var player_position = $"../../Dash".global_position
+		player_position.y = global_transform.origin.y
+		look_at(player_position, Vector3.UP)
+
+	#if it gets stuck on a ledge
 	var wall = is_on_wall()
 	if wall == true and max_jumps > 0:
 		velocity.y = jump_impulse
@@ -22,59 +30,38 @@ func _physics_process(delta):
 		max_jumps = 1
 	# entered follow range
 	if follow_player == true:
-		var y_velocity := velocity.y
-		velocity.y = 0.0
-		velocity.y = y_velocity + _gravity * delta
-		var direction_neg = Vector3()
 		nav.target_position = $"../../Dash".global_position
-		direction = nav.get_next_path_position() - global_position
-		direction = direction.normalized()
+		direction = (nav.get_next_path_position() - global_position).normalized()
 		velocity = velocity.move_toward(direction * move_speed, acceleration * delta)
-		move_and_slide()
-	# entered shooting range
 	elif shoot_mode == true:
-		var y_velocity := velocity.y
-		velocity.y = 0.0
-		velocity.y = y_velocity + _gravity * delta
-		var direction_neg = Vector3()
 		nav.target_position = $"../../Dash".global_position
-		direction = nav.get_next_path_position() - global_position
-		direction = direction.normalized()
-		direction_neg = - direction
-		velocity = velocity.move_toward(direction_neg * backup_speed, acceleration * delta)
-		move_and_slide()
-	else:
-		var y_velocity := velocity.y
-		velocity.y = 0.0
-		velocity.y = y_velocity + _gravity * delta
-		move_and_slide()
-
+		direction = (nav.get_next_path_position() - global_position).normalized()
+		velocity = velocity.move_toward(-direction * backup_speed, acceleration * delta)
+		
+	move_and_slide()
+#make bullet
 func spawn():
-	if $SpawnTimer.is_stopped() == true:
+	if $SpawnTimer.is_stopped():
 		$SpawnTimer.start()
-		var obj = spawn_bullet.instantiate()
-		add_child(obj)
-	elif $SpawnTimer.is_stopped() == false:
-		pass
+		var bullet_instance = spawn_bullet.instantiate()
+		add_child(bullet_instance)
 
-#taking damage
+#take damage when hit within hurtbox
 func _on_area_3d_area_entered(area):
 	if area.is_in_group("player") or area.is_in_group("bothSides"):
 		var area_position = area.global_transform.origin
-		var direction = (global_transform.origin - area_position).normalized()
-		velocity = direction * Knockback
+		var hit_direction = (global_transform.origin - area_position).normalized()
+		velocity = hit_direction * Knockback
 		velocity.y = jump_impulse
 		health -= 1
 		print(health)
 		if health == 0:
 			queue_free()
-
-# Follow the player 
+# Follow player
 func _on_tracking_area_body_entered(body):
 	if body.name == "Dash":
 		follow_player = true
-
-#Too far to follow
+# Too far to follow
 func _on_tracking_area_body_exited(body):
 	if body.name == "Dash":
 		follow_player = false
@@ -85,7 +72,6 @@ func _on_shooting_area_body_entered(body):
 		follow_player = false
 		shoot_mode = true
 		spawn()
-		
 
 #Too far to shoot
 func _on_shooting_area_body_exited(body):

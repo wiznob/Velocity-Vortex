@@ -1,0 +1,29 @@
+[gd_scene load_steps=7 format=3 uid="uid://dhsyox4u7el72"]
+
+[ext_resource type="Texture2D" uid="uid://hmg0ln8sgjfi" path="res://Levels/skybox.png" id="1_w7cua"]
+[ext_resource type="PackedScene" uid="uid://coiul1xe4gccj" path="res://UI/Dead/Death.tscn" id="2_tkqdx"]
+[ext_resource type="PackedScene" uid="uid://bfikvyvylhkq" path="res://UI/Pause/pause_menu.tscn" id="3_6lngw"]
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_svgc2"]
+ground_color = Color(0, 0.238806, 0.22219, 1)
+night_sky = ExtResource("1_w7cua")
+
+[sub_resource type="Sky" id="Sky_hb0yy"]
+sky_material = SubResource("PhysicalSkyMaterial_svgc2")
+
+[sub_resource type="Environment" id="Environment_u70wg"]
+background_mode = 2
+sky = SubResource("Sky_hb0yy")
+glow_enabled = true
+fog_light_energy = 16.0
+
+[node name="Level-3" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_u70wg")
+
+[node name="Death" parent="." instance=ExtResource("2_tkqdx")]
+visible = false
+
+[node name="PauseMenu" parent="." instance=ExtResource("3_6lngw")]
+visible = false
