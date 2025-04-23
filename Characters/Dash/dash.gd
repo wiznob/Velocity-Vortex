@@ -53,6 +53,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_released("jump"):
 		if velocity.y > 0.0:
 			velocity.y *= 0.5
+func _ready():
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
 func _physics_process(delta: float) -> void:
 	if dead == true:
 		return
@@ -174,6 +177,7 @@ func _on_hurt_area_area_entered(area):
 	var area_position = area.global_transform.origin
 	var direction = (global_transform.origin - area_position).normalized()
 	if area.is_in_group("bothSides") or area.is_in_group("EnemyAttack"):
+		$AudioStreamPlayer3D.play()
 		velocity = direction * wall_jump_impulse
 		velocity.y = jump_impulse
 		current_jumps = 2
@@ -192,6 +196,9 @@ func _on_health_timer_timeout():
 	$healthBar/damageBar.value = health
 
 func _on_death_checkpoint_used():
+	dead = false
+	$".".process_mode = Node.PROCESS_MODE_INHERIT
+	$".".set_process_input(true)
 	health = 3
 	$healthBar/damageBar.value = health
 	$healthBar.value = health

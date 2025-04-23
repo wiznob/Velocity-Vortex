@@ -14,7 +14,7 @@ signal blowup
 @onready var floor_ray = $FloorRay
 @onready var wall_ray = $WallRay
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	player_kill()
 	#despawn after blow up effect
 	if died == true and health == 1:
@@ -36,7 +36,7 @@ func get_knockback_direction():
 	return (global_transform.origin - nav.target_position).normalized()
 	
 func apply_knockback():
-	var direction = get_knockback_direction()
+	direction = get_knockback_direction()
 	direction.y = 1.0  # for vertical knockback
 	direction = direction.normalized()
 	var impulse = direction * knockback
@@ -45,6 +45,7 @@ func apply_knockback():
 # Will run if hit by a player
 func player_kill():
 	if self_destruct == true and (floor_ray.is_colliding() or wall_ray.is_colliding()):
+		$AudioStreamPlayer3D.play()
 		$Explosion.play_effect()
 		$MeshInstance3D.visible = false 
 		$eye.visible = false
@@ -88,6 +89,7 @@ func _on_body_entered(body):
 
 #If it hits the player first blow up instantly 
 func _on_blowup():
+		$AudioStreamPlayer3D.play()
 		$AttackBox/AttackShape.call_deferred("set_disabled", false)
 		$Explosion.play_effect()
 		$MeshInstance3D.visible = false 

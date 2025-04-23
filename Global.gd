@@ -20,11 +20,10 @@ func _ready():
 	})
 
 	add_child(audio_player)
-	audio_player.stream = preload("res://audio/test-audio.mp3")
+	#audio_player.stream = preload("res://audio/music.mp3")
 	audio_player.play()
 	
 	load_game()
-	#audio_player.stream = preload("res://audio/test-audio.mp3")
 	audio_player.volume_db = volume_db
 	audio_player.play()
 	audio_player.finished.connect(_on_audio_end)

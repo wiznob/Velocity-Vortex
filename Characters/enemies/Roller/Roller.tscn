@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://d0jeu7c1ii0j6"]
+[gd_scene load_steps=13 format=3 uid="uid://d0jeu7c1ii0j6"]
 
 [ext_resource type="Texture2D" uid="uid://d3km2wkdd2sjb" path="res://Characters/enemies/Roller/hexagon.jpg" id="1_gqh8k"]
 [ext_resource type="Script" path="res://Characters/enemies/Roller/roller.gd" id="1_o82ul"]
+[ext_resource type="AudioStream" uid="uid://dxpw73jtng0en" path="res://audio/Explosion.mp3" id="2_rhwh5"]
 [ext_resource type="PackedScene" uid="uid://dlnm16mdpmmf4" path="res://Effects/Explosion/Explosion.tscn" id="3_pu260"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_wncs8"]
@@ -35,6 +36,10 @@ is_hemisphere = true
 contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("1_o82ul")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_rhwh5")
+volume_db = -8.55
 
 [node name="TrackingArea" type="Area3D" parent="."]
 

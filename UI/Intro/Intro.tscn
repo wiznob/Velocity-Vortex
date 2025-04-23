@@ -1,0 +1,55 @@
+[gd_scene load_steps=7 format=3 uid="uid://b0m86v60tnvqf"]
+
+[ext_resource type="PackedScene" uid="uid://c7b7w3kk3hs66" path="res://UI/background.tscn" id="1_et0nb"]
+[ext_resource type="FontFile" uid="uid://cvs2kj5ouuwty" path="res://UI/Fonts/toxigenesis.rg-bold.otf" id="2_bu5v1"]
+[ext_resource type="Script" path="res://UI/Intro/intro.gd" id="3_ejigu"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_fg2xv"]
+line_spacing = 1.0
+font = ExtResource("2_bu5v1")
+font_size = 70
+font_color = Color(0.99062, 0.994634, 0.999891, 1)
+outline_size = 30
+outline_color = Color(0.243137, 0.486275, 0.694118, 1)
+shadow_size = 20
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(5, 10)
+
+[sub_resource type="Animation" id="Animation_d5e08"]
+resource_name = "Scroll"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qs1os"]
+_data = {
+"Scroll": SubResource("Animation_d5e08")
+}
+
+[node name="Intro" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" parent="." instance=ExtResource("1_et0nb")]
+layout_mode = 1
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "In the futuristic city of NovaPoint, speed is everything. The city is powered by a mysterious energy source known as the Velocity Vortex, a swirling core of pure kinetic energy. However, the Vortex is unstable and needs constant maintenance to prevent it from collapsing and plunging the city into chaos. 
+
+You play as Dash, a young and agile courier who loves speed. Dash is recruited by the city’s top scientists to embark on a high-speed mission through the various districts of NovaPoint. Your goal is to collect energy shards scattered across the city to stabilize the Velocity Vortex. "
+label_settings = SubResource("LabelSettings_fg2xv")
+autowrap_mode = 2
+justification_flags = 169
+script = ExtResource("3_ejigu")
+
+[node name="Scroll" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qs1os")
+}

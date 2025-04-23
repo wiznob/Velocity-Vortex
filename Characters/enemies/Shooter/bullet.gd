@@ -5,6 +5,7 @@ var move_direction = Vector3()
 var _last_movement_direction = Vector3()
 
 func _ready():
+	$AudioStreamPlayer3D.play()
 	$HitBoxTimer.start()
 
 func _physics_process(delta):

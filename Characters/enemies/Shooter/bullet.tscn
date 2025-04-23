@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://d4bp0p57rjoea"]
+[gd_scene load_steps=7 format=3 uid="uid://d4bp0p57rjoea"]
 
 [ext_resource type="Script" path="res://Characters/enemies/Shooter/bullet.gd" id="1_xdoy4"]
+[ext_resource type="AudioStream" uid="uid://d1aqxhu83v3k1" path="res://audio/bulletSound.mp3" id="2_dgiaj"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lfyir"]
 size = Vector3(0.188965, 0.0984955, 0.454834)
@@ -40,6 +41,9 @@ autostart = true
 
 [node name="HitBoxTimer" type="Timer" parent="."]
 wait_time = 0.1
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_dgiaj")
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
