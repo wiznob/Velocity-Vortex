@@ -49,6 +49,7 @@ func spawn():
 #take damage when hit within hurtbox
 func _on_area_3d_area_entered(area):
 	if area.is_in_group("player") or area.is_in_group("bothSides"):
+		$SpawnTimer.start()
 		var area_position = area.global_transform.origin
 		var hit_direction = (global_transform.origin - area_position).normalized()
 		velocity = hit_direction * Knockback
@@ -78,3 +79,8 @@ func _on_shooting_area_body_exited(body):
 	if body.name == "Dash":
 		follow_player = true
 		shoot_mode = false
+		$SpawnTimer.stop()
+
+
+func _on_spawn_timer_timeout():
+	spawn()

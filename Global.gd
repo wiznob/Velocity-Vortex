@@ -59,6 +59,12 @@ func load_game():
 	else:
 		print("No save file found, starting with default settings.")
 
+func reset_save():
+	coins = 0
+	current_lvl = 1
+	save_game()
+	load_game()
+
 # automatically save when about to quit:
 func _notification(uhoh):
 	if uhoh == NOTIFICATION_WM_CLOSE_REQUEST:

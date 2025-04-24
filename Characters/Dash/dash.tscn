@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://g5yx4s6flap8"]
+[gd_scene load_steps=12 format=3 uid="uid://g5yx4s6flap8"]
 
 [ext_resource type="Script" path="res://Characters/Dash/dash.gd" id="1_fymcf"]
 [ext_resource type="PackedScene" uid="uid://c4euyfd7w5uls" path="res://Characters/Dash/DashSkin.tscn" id="2_3r4c0"]
 [ext_resource type="AudioStream" uid="uid://bbeebt883ssqi" path="res://audio/hurt.mp3" id="3_xy8nn"]
+[ext_resource type="AudioStream" uid="uid://b418u5mc37bma" path="res://audio/sword-swing.mp3" id="4_nx0f5"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_0wkjb"]
 height = 1.90975
@@ -112,8 +113,11 @@ one_shot = true
 
 [node name="AttackAnimation" type="Timer" parent="."]
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+[node name="hurt" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_xy8nn")
+
+[node name="Attack" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_nx0f5")
 
 [connection signal="area_entered" from="HurtArea" to="." method="_on_hurt_area_area_entered"]
 [connection signal="area_entered" from="Rotate/AttackArea" to="." method="_on_attack_area_area_entered"]

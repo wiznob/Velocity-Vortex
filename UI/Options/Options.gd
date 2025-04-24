@@ -48,3 +48,7 @@ func _on_music_box_toggled(toggled_on):
 
 func _on_music_slider_value_changed(value):
 	Global.set_volume(value)
+
+
+func _on_button_pressed():
+	Global.reset_save()

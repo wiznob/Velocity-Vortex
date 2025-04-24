@@ -165,6 +165,7 @@ func _on_attack_timer_timeout():
 #Checking if attack connected
 func _on_attack_area_area_entered(area):
 	if area.is_in_group("enemies"):
+		$Attack.play()
 		if is_on_floor() == false:
 			velocity.y = jump_impulse
 	elif area.is_in_group("BlueOrb"):
@@ -177,7 +178,7 @@ func _on_hurt_area_area_entered(area):
 	var area_position = area.global_transform.origin
 	var direction = (global_transform.origin - area_position).normalized()
 	if area.is_in_group("bothSides") or area.is_in_group("EnemyAttack"):
-		$AudioStreamPlayer3D.play()
+		$hurt.play()
 		velocity = direction * wall_jump_impulse
 		velocity.y = jump_impulse
 		current_jumps = 2
