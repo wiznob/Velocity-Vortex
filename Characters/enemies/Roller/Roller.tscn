@@ -6,13 +6,13 @@
 [ext_resource type="PackedScene" uid="uid://dlnm16mdpmmf4" path="res://Effects/Explosion/Explosion.tscn" id="3_pu260"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_wncs8"]
-radius = 9.0
+radius = 10.5048
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_l3vcx"]
 radius = 0.651032
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_275tf"]
-radius = 3.0
+radius = 3.50414
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vcje0"]
 albedo_texture = ExtResource("1_gqh8k")

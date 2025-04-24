@@ -43,8 +43,6 @@ func _physics_process(delta):
 func spawn():
 	if $SpawnTimer.is_stopped():
 		$SpawnTimer.start()
-		var bullet_instance = spawn_bullet.instantiate()
-		add_child(bullet_instance)
 
 #take damage when hit within hurtbox
 func _on_area_3d_area_entered(area):
@@ -55,7 +53,6 @@ func _on_area_3d_area_entered(area):
 		velocity = hit_direction * Knockback
 		velocity.y = jump_impulse
 		health -= 1
-		print(health)
 		if health == 0:
 			queue_free()
 # Follow player
@@ -83,4 +80,6 @@ func _on_shooting_area_body_exited(body):
 
 
 func _on_spawn_timer_timeout():
-	spawn()
+		var bullet_instance = spawn_bullet.instantiate()
+		add_child(bullet_instance)
+		spawn()
