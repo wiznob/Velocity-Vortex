@@ -3,3 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://cn3qbdiog30ul" path="res://Models/imported/futuristic low poly city by niko.glb" id="1_56trx"]
 
 [node name="futuristic low poly city by niko" instance=ExtResource("1_56trx")]
+
+[node name="Cube_003" parent="." index="33"]
+transform = Transform3D(6.13163, 0, 0, 0, 6.13163, 0, 0, 0, 6.13163, -11.5843, 5.48453, -15.6891)

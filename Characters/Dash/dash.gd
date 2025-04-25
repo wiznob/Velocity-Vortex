@@ -14,7 +14,7 @@ var controller_sensitivity  = Global.controller_sensitivity
 @export var wall_jump_impulse := 20.0
 @export var current_jumps = 0
 @export var max_jumps := 2
-@export var wall_friction := 0.8
+@export var wall_friction := 0.7
 @export var max_wall_friction :=  2.0
 var _camera_input_direction := Vector2.ZERO
 var _gravity := -30.0
@@ -169,8 +169,12 @@ func _on_attack_area_area_entered(area):
 		if is_on_floor() == false:
 			velocity.y = jump_impulse
 	elif area.is_in_group("BlueOrb"):
+		$Spring.play()
+		$Spring.seek(1)
 		velocity.y = 50
 	elif area.is_in_group("RedOrb"):
+		$Spring.play()
+		$Spring.seek(1)
 		velocity.y = 20
 
 # Taking damage
