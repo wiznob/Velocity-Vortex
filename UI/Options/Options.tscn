@@ -36,6 +36,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("3_r4er5")
+theme_override_constants/separation = 7
 
 [node name="CameraLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2

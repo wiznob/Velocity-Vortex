@@ -64,6 +64,7 @@ offset_bottom = 100.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_llpf8")
+theme_override_constants/separation = 7
 
 [node name="Resume" type="Button" parent="VBoxContainer"]
 process_mode = 3
