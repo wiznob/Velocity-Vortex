@@ -321,6 +321,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -374.618, 74.7239, 5.24227)
 [node name="Ship" parent="." instance=ExtResource("15_2gls6")]
 transform = Transform3D(0.86981, -0.226526, -0.438311, 0.326742, 0.930115, 0.167707, 0.36969, -0.289088, 0.883039, 19.7621, 3.52247, 9.44791)
 
+[node name="Goal" parent="." instance=ExtResource("26_7tbaf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -376.699, 75.8874, 7.83791)
+
+[node name="GoalUI" parent="Goal" instance=ExtResource("27_0es44")]
+
 [node name="Orbs" type="Node3D" parent="."]
 
 [node name="BounceOrbRed" parent="Orbs" instance=ExtResource("16_56tbi")]
@@ -341,14 +346,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -341.051, 73.7747, 7.01149)
 [node name="BounceOrbRed5" parent="Orbs" instance=ExtResource("16_56tbi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -333.141, 71.387, 7.01149)
 
-[node name="Goal" parent="Orbs" instance=ExtResource("26_7tbaf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -376.699, 75.8874, 7.83791)
-
-[node name="GoalUI" parent="Orbs/Goal" instance=ExtResource("27_0es44")]
-
 [node name="Tower" parent="." instance=ExtResource("28_b0y5p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -352.744, 74.0615, -18.9204)
 
 [connection signal="checkpoint_used" from="Death" to="Dash" method="_on_death_checkpoint_used"]
 [connection signal="i_am_dead" from="Dash" to="Death" method="_on_dash_i_am_dead"]
-[connection signal="goal_entred" from="Orbs/Goal" to="." method="goal_entred"]
+[connection signal="goal_entred" from="Goal" to="." method="goal_entred"]
